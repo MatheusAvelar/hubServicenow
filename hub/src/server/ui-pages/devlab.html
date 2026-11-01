@@ -44,6 +44,14 @@
         .dl-btn.sec:hover { background: var(--accent-soft); }
         .dl-btn.danger { background: #FFFFFF; color: var(--bad); border-color: var(--bad); }
         .dl-btn.small { min-height: 36px; padding: 0 12px; font-size: 14px; }
+        /* O CSS global do ServiceNow estiliza button e a: estas regras devolvem o visual da página. */
+        .dl button.dl-tab, .dl button.dl-tab:hover, .dl button.dl-tab:focus { background: transparent !important; border: 0 !important;
+            border-bottom: 3px solid transparent !important; border-radius: 0 !important; box-shadow: none !important;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif !important; font-size: 15px !important; text-shadow: none !important; }
+        .dl button.dl-tab[aria-selected=true] { border-bottom-color: #7FC8B4 !important; color: #FFFFFF !important; }
+        .dl .dl-btn { font-family: 'IBM Plex Sans', system-ui, sans-serif !important; text-shadow: none !important; box-shadow: none !important;
+            line-height: 1.2 !important; text-decoration: none !important; white-space: nowrap; }
+        .dl a.dl-btn:hover, .dl a.dl-btn:focus { text-decoration: none !important; }
         .dl-actions { display: flex; gap: 8px; flex-wrap: wrap; }
         .dl-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
         .dl-badge.draft { background: #EEF1EF; color: var(--muted); }

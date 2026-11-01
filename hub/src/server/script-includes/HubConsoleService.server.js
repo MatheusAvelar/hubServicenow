@@ -23,6 +23,7 @@ HubConsoleService.ACTIONS = {
     ranking_csv: 'rankingCsv',
     activities: 'activities',
     activity_json: 'activityJson',
+    activity_raw: 'activityRaw',
     validate: 'validate',
     import: 'importActivity',
     publish: 'publish',
@@ -133,6 +134,21 @@ HubConsoleService.prototype = {
         var a = this._activity(params.number);
         if (!a) return { ok: false, status: 404, error: 'Atividade não encontrada.' };
         return { ok: true, json: JSON.stringify(this.importer.toJson(a, true), null, 2) };
+    },
+
+    /** Diagnóstico: valores brutos de setup/params como estão gravados (para investigar JSON ilegível). */
+    activityRaw: function (params) {
+        var a = this._activity(params.number);
+        if (!a) return { ok: false, status: 404, error: 'Atividade não encontrada.' };
+        var checks = [];
+        var c = new GlideRecord(HubConsoleService.T.check);
+        c.addQuery('activity', a.getUniqueValue());
+        c.orderBy('order');
+        c.query();
+        while (c.next()) {
+            checks.push({ code: c.getValue('code'), params: c.getValue('params'), params_display: c.getDisplayValue('params'), params_type: typeof c.getValue('params') });
+        }
+        return { ok: true, setup: a.getValue('setup'), setup_display: a.getDisplayValue('setup'), checks: checks };
     },
 
     /** Valida sem gravar e descreve o que a importação vai fazer. */
