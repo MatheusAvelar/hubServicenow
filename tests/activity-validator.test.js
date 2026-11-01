@@ -131,3 +131,13 @@ test('validateCheck isolado (edição manual no Hub)', () => {
     assert.equal(v.validateCheck('eval_script', {}, 'c1').length, 1);
     assert.ok(v.validateCheck('record_exists', null, 'c1')[0].includes('"params"'));
 });
+
+test('esqueleto de código do enunciado não reprova os próprios checks script_not_contains', () => {
+    for (const f of fs.readdirSync(path.join(__dirname, '..', 'activities')).filter((n) => n.endsWith('.json'))) {
+        const a = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'activities', f), 'utf8'));
+        const code = (a.description.match(/<pre>[\s\S]*?<\/pre>/g) || []).join('\n');
+        for (const c of a.checks.filter((x) => x.type === 'script_not_contains')) {
+            assert.ok(!code.includes(c.params.text), `${f}: o esqueleto contém "${c.params.text}" (${c.id})`);
+        }
+    }
+});

@@ -4,15 +4,21 @@
   "track": "Business Rules",
   "title": "Grupo de atribuição por categoria",
   "level": "junior",
-  "description": "<p>Incidentes de <strong>rede</strong> estão caindo sem grupo e ficam parados na fila.</p><p>Crie uma <strong>Business Rule <em>before insert</em></strong> na tabela <code>incident</code> que, quando a <strong>Categoria</strong> for <code>network</code> e o <strong>Grupo de atribuição</strong> estiver vazio, preencha o grupo <code>Lab Rede</code>.</p><ul><li>O setup já criou o grupo <code>Lab Rede</code>.</li><li>Não use <code>gs.log()</code> (não existe em apps escopados); se precisar registrar algo, use <code>gs.info()</code>.</li><li>Evite fixar o sys_id do grupo no script: busque o grupo pelo nome.</li><li>Para testar, crie um incidente de categoria Network sem grupo.</li></ul>",
+  "description": "<h4>Contexto</h4>\n<p>Incidentes de <strong>rede</strong> estão sendo registrados sem <strong>grupo de atribuição</strong> e ficam parados na fila, porque ninguém sabe que precisa atendê-los. Sua tarefa é automatizar o encaminhamento: <strong>todo incidente novo da categoria Network sem grupo deve ir para o grupo Lab Rede</strong>.</p>\n\n<h4>O que você vai construir</h4>\n<p>Uma <strong>Business Rule</strong> na tabela <code>incident</code> que, ao <strong>inserir</strong> um incidente com <strong>Category = Network</strong> e <strong>Assignment group</strong> vazio, preenche o grupo <code>Lab Rede</code>.</p>\n\n<h4>Conceitos que você vai usar</h4>\n<ul>\n<li><strong>Business Rule before insert</strong>: roda só na criação do registro, antes de gravar. O que você alterar em <code>current</code> é salvo junto.</li>\n<li><strong>Campo de referência</strong>: <code>assignment_group</code> guarda o <em>sys_id</em> de um registro da tabela <code>sys_user_group</code>, não o nome do grupo.</li>\n<li><strong>GlideRecord</strong>: a forma de consultar uma tabela por script. Você vai usá-lo para achar o grupo pelo nome.</li>\n<li><strong>Nada de sys_id fixo no código</strong>: o sys_id do grupo muda de uma instância para outra. Busque pelo nome.</li>\n<li><strong>Logs</strong>: em apps escopados <code>gs.log()</code> não existe. Para registrar algo, use <code>gs.info()</code>.</li>\n</ul>\n\n<h4>Antes de começar</h4>\n<ol>\n<li>Clique em <strong>Aprovar e instalar</strong>. O Agent cria na sua PDI o grupo <code>Lab Rede</code>.</li>\n<li>Só vale o que você criar <strong>depois</strong> da aprovação.</li>\n</ol>\n\n<h4>Passo a passo</h4>\n<ol>\n<li>Abra <strong>System Definition → Business Rules</strong> e clique em <strong>New</strong>.</li>\n<li>Preencha:\n<ul>\n<li><strong>Name</strong>: <code>LAB0002 - Grupo de rede</code></li>\n<li><strong>Table</strong>: <code>Incident [incident]</code></li>\n<li><strong>Active</strong> e <strong>Advanced</strong>: marcados</li>\n</ul>\n</li>\n<li>Na aba <strong>When to run</strong>:\n<ul>\n<li><strong>When</strong>: <code>before</code></li>\n<li>Marque <strong>só Insert</strong> (não marque Update)</li>\n<li>Em <strong>Filter Conditions</strong>: <strong>Category</strong> <em>is</em> <strong>Network</strong> <em>AND</em> <strong>Assignment group</strong> <em>is empty</em></li>\n</ul>\n</li>\n<li>Na aba <strong>Advanced</strong>, complete o script:\n<pre><code>(function executeRule(current, previous /*null when async*/) {\n\n    // A condição já filtrou: Category = Network e Assignment group vazio.\n\n    // 1) Crie um GlideRecord da tabela sys_user_group.\n    // 2) Busque o registro cujo campo name é 'Lab Rede'\n    //    (dica: o método get() aceita o nome do campo e o valor).\n    // 3) Se encontrou, coloque o sys_id do grupo em current.assignment_group.\n    // 4) Se não encontrou, registre um aviso com gs.info().\n\n})(current, previous);</code></pre>\n</li>\n<li>Clique em <strong>Submit</strong>.</li>\n</ol>\n\n<h4>Como testar</h4>\n<ol>\n<li>Abra <strong>Incident → Create New</strong>.</li>\n<li>Escolha qualquer <strong>Caller</strong>, coloque <strong>Category</strong> = <strong>Network</strong>, deixe <strong>Assignment group</strong> vazio e preencha a <strong>Short description</strong>.</li>\n<li>Clique em <strong>Submit</strong> e abra o incidente: o <strong>Assignment group</strong> deve ser <strong>Lab Rede</strong>.</li>\n<li>Repita com <strong>Category = Software</strong>: o grupo deve continuar vazio.</li>\n<li>Repita com <strong>Category = Network</strong> já escolhendo outro grupo: a sua BR <strong>não</strong> deve trocar o grupo.</li>\n<li>Volte ao Dev Lab e clique em <strong>Validar</strong>.</li>\n</ol>\n\n<h4>Como você será avaliado (100 pts)</h4>\n<table>\n<tr><th>Critério</th><th>O que o Agent confere</th><th>Pontos</th></tr>\n<tr><td>c1</td><td>Existe uma BR <strong>before insert</strong>, <strong>ativa</strong>, na tabela <code>incident</code>, criada depois da aprovação.</td><td>30</td></tr>\n<tr><td>c2</td><td>Nenhuma BR ativa de <code>incident</code> que você criou usa <code>gs.log(</code>.</td><td>20</td></tr>\n<tr><td>c3</td><td>Existe um incidente criado depois da aprovação com Category Network e grupo Lab Rede.</td><td>50</td></tr>\n</table>\n\n<h4>Erros comuns</h4>\n<ul>\n<li><strong>Colocar o nome no campo de referência</strong> (<code>current.assignment_group = 'Lab Rede'</code>): o campo espera o sys_id. Use o registro encontrado pelo GlideRecord.</li>\n<li><strong>Fixar o sys_id do grupo no código</strong>: funciona na sua PDI e quebra em qualquer outra.</li>\n<li><strong>Marcar Update</strong>: a regra passaria a mexer em incidentes já em andamento.</li>\n<li><strong>Esquecer a condição de grupo vazio</strong>: a BR sobrescreveria um grupo escolhido por alguém.</li>\n<li><strong>Usar <code>gs.log()</code></strong>: não existe em apps escopados e reprova o critério c2.</li>\n</ul>\n\n<blockquote><p>Tempo estimado: 30 a 40 minutos. Travou? Use <strong>Ver dica</strong> no critério c3 (custa 10 pts).</p></blockquote>",
   "due_date": "2026-11-22",
   "max_attempts": 5,
   "setup": [
     {
       "action": "create_record",
       "table": "sys_user_group",
-      "key": ["name"],
-      "values": { "name": "Lab Rede", "description": "Grupo criado pelo Dev Lab (LAB0002)", "active": true }
+      "key": [
+        "name"
+      ],
+      "values": {
+        "name": "Lab Rede",
+        "description": "Grupo criado pelo Dev Lab (LAB0002)",
+        "active": true
+      }
     }
   ],
   "checks": [
@@ -20,21 +26,35 @@
       "id": "c1",
       "name": "BR before insert na tabela incident",
       "type": "business_rule",
-      "params": { "table": "incident", "when": "before", "action": ["insert"], "active": true },
+      "params": {
+        "table": "incident",
+        "when": "before",
+        "action": [
+          "insert"
+        ],
+        "active": true
+      },
       "points": 30
     },
     {
       "id": "c2",
       "name": "Script sem gs.log()",
       "type": "script_not_contains",
-      "params": { "source_table": "sys_script", "filter": "collection=incident^active=true", "text": "gs.log(" },
+      "params": {
+        "source_table": "sys_script",
+        "filter": "collection=incident^active=true",
+        "text": "gs.log("
+      },
       "points": 20
     },
     {
       "id": "c3",
       "name": "Incidente de rede atribuído ao Lab Rede",
       "type": "record_exists",
-      "params": { "table": "incident", "query": "category=network^assignment_group.name=Lab Rede" },
+      "params": {
+        "table": "incident",
+        "query": "category=network^assignment_group.name=Lab Rede"
+      },
       "points": 50,
       "hint": "A condição da BR precisa olhar a categoria e se o grupo ainda está vazio (assignment_group.nil()).",
       "hint_cost": 10

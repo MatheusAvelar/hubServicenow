@@ -145,10 +145,10 @@ test('configuração do Agent não grava em sys_properties (global recusa criaç
     assert.deepEqual(privileges('write').filter((t) => t === 'sys_properties'), []);
 });
 
-test('todo campo JSON declara maxLength (sem ele a coluna nasce pequena e o JSON é cortado)', () => {
+test('todo campo JSON/HTML declara maxLength (sem ele a coluna nasce pequena e o conteúdo é cortado)', () => {
     for (const f of ['hub/src/fluent/tables.now.ts', 'agent/src/fluent/tables.now.ts']) {
         const src = fs.readFileSync(path.join(__dirname, '..', f), 'utf8');
-        const cols = src.match(/JsonColumn\(\{[^}]*\}\)/g) || [];
+        const cols = src.match(/(Json|Html)Column\(\{[^}]*\}\)/g) || [];
         assert.ok(cols.length > 0, `nenhum JsonColumn em ${f}`);
         for (const c of cols) assert.match(c, /maxLength: \d{4,}/, `${f}: ${c}`);
     }

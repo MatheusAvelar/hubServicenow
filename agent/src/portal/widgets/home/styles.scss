@@ -66,6 +66,19 @@
 .dl-detail-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--dl-text-2); margin-bottom: 12px; }
 .dl-section { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
 .dl-statement { line-height: 1.6; }
+.dl-statement h4 { font-size: 15px; font-weight: 700; margin: 20px 0 6px; color: var(--dl-text); }
+.dl-statement h4:first-child { margin-top: 0; }
+.dl-statement p { margin: 0 0 10px; }
+.dl-statement ol, .dl-statement ul { margin: 0 0 12px; padding-left: 22px; }
+.dl-statement li { margin-bottom: 6px; }
+.dl-statement pre { font-family: var(--dl-mono); font-size: 13px; background: var(--dl-pending-bg); border: 1px solid var(--dl-border);
+    border-radius: 8px; padding: 12px; overflow-x: auto; white-space: pre; margin: 6px 0 12px; }
+.dl-statement pre code { background: none; padding: 0; }
+.dl-statement blockquote { margin: 10px 0 14px; padding: 10px 14px; border-left: 4px solid var(--dl-accent); background: var(--dl-accent-soft);
+    border-radius: 0 8px 8px 0; color: var(--dl-text); }
+.dl-statement blockquote p:last-child { margin-bottom: 0; }
+.dl-statement table { border-collapse: collapse; margin: 6px 0 12px; }
+.dl-statement th, .dl-statement td { border: 1px solid var(--dl-border); padding: 6px 10px; text-align: left; }
 .dl-statement code { font-family: var(--dl-mono); background: var(--dl-pending-bg); padding: 1px 4px; border-radius: 4px; color: var(--dl-text); }
 .dl-setup-preview ul, .dl-setup-log ul { margin: 0; padding-left: 20px; }
 .dl-setup-fail { color: var(--dl-fail); }

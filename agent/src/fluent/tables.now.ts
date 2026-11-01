@@ -39,7 +39,7 @@ export const x_1556735_dlagent_activity = Table({
                 senior: { label: 'Sênior', sequence: 2 },
             },
         }),
-        description: HtmlColumn({ label: 'Enunciado', readOnly: true }),
+        description: HtmlColumn({ label: 'Enunciado', maxLength: 65536, readOnly: true }),
         due_date: DateColumn({ label: 'Prazo', readOnly: true }),
         max_attempts: IntegerColumn({ label: 'Máximo de tentativas', readOnly: true }),
         setup: JsonColumn({ label: 'Setup (JSON)', maxLength: 65000, readOnly: true }),

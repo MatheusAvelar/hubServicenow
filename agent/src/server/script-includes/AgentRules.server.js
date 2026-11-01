@@ -3,7 +3,7 @@
  */
 var AgentRules = Class.create();
 
-AgentRules.AGENT_VERSION = '1.1.3';
+AgentRules.AGENT_VERSION = '1.1.4';
 
 /** Backoff do outbox: 15 min, 30, 60, 120… até 12 h. */
 AgentRules.BACKOFF_BASE_MIN = 15;

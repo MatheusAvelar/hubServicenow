@@ -61,7 +61,7 @@ export const x_1556735_dlhub_activity = Table({
                 senior: { label: 'Sênior', sequence: 2 },
             },
         }),
-        description: HtmlColumn({ label: 'Enunciado' }),
+        description: HtmlColumn({ label: 'Enunciado', maxLength: 65536 }),
         due_date: DateColumn({ label: 'Prazo' }),
         state: ChoiceColumn({
             label: 'Estado',
