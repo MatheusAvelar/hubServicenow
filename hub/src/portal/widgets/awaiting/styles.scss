@@ -1,0 +1,14 @@
+.dl-awaiting-activity { margin: 0 0 16px; font-weight: 600; }
+.dl-awaiting-activity .dl-card-sub { display: block; font-weight: 400; }
+.dl-awaiting-list { list-style: none; margin: 0; padding: 0; }
+.dl-awaiting-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--dl-border);
+    flex-wrap: wrap;
+}
+.dl-awaiting-list li:last-child { border-bottom: 0; }
+.dl-awaiting-name { font-weight: 600; }
+.dl-awaiting-seen { font-size: 14px; margin-left: auto; }

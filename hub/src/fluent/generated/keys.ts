@@ -189,6 +189,66 @@ declare global {
                         table: 'sys_ui_action'
                         id: '6939bf3f338a4e468db42e51b922bccd'
                     }
+                    x_1556735_dlhub_header: {
+                        table: 'sp_header_footer'
+                        id: '418098e7b1314754a23261f5402db92d'
+                    }
+                    x_1556735_dlhub_painel_c1: {
+                        table: 'sp_container'
+                        id: '6218121edad24f2faec9d9d5e2c10e51'
+                    }
+                    x_1556735_dlhub_painel_i_awaiting: {
+                        table: 'sp_instance'
+                        id: '0a35e8938dbd4a948918e11644912e40'
+                    }
+                    x_1556735_dlhub_painel_i_kpis: {
+                        table: 'sp_instance'
+                        id: '4b58e538d6794dba8685af8951dac061'
+                    }
+                    x_1556735_dlhub_painel_i_ranking: {
+                        table: 'sp_instance'
+                        id: 'c537f7b4d7a24c2c9f70ec029df9b33d'
+                    }
+                    x_1556735_dlhub_painel_r1: {
+                        table: 'sp_row'
+                        id: 'f232b6e2a8274ea48cf4e10c714890c1'
+                    }
+                    x_1556735_dlhub_painel_r1c1: {
+                        table: 'sp_column'
+                        id: 'e5b437770f364768b9f9a75b0ea51681'
+                    }
+                    x_1556735_dlhub_painel_r2: {
+                        table: 'sp_row'
+                        id: '6c8fead959b84484a702117d1a5c8f5c'
+                    }
+                    x_1556735_dlhub_painel_r2c1: {
+                        table: 'sp_column'
+                        id: 'dfeec1dfe131460c8d1f848894a9efdb'
+                    }
+                    x_1556735_dlhub_painel_r2c2: {
+                        table: 'sp_column'
+                        id: 'ef7eade3153e4e68972bd3eff19a0804'
+                    }
+                    x_1556735_dlhub_portal: {
+                        table: 'sp_portal'
+                        id: 'ebae5439822647e290bbaf754b32fc1f'
+                    }
+                    x_1556735_dlhub_theme: {
+                        table: 'sp_theme'
+                        id: '801e16e189094d62ab34f5f90d120322'
+                    }
+                    x_1556735_dlhub_w_awaiting: {
+                        table: 'sp_widget'
+                        id: 'd64787a4128e466f99068af59b85789d'
+                    }
+                    x_1556735_dlhub_w_kpis: {
+                        table: 'sp_widget'
+                        id: 'eaec0994717e40af9634bf34dc9f8bbf'
+                    }
+                    x_1556735_dlhub_w_ranking: {
+                        table: 'sp_widget'
+                        id: 'e53335d94c0b45b4a1ea58398708cca9'
+                    }
                 }
                 composite: [
                     {
@@ -2196,6 +2256,13 @@ declare global {
                         key: {
                             name: 'x_1556735_dlhub_check'
                             element: 'type'
+                        }
+                    },
+                    {
+                        table: 'sp_page'
+                        id: '7d44ae164ee84d2dbbe342613550009a'
+                        key: {
+                            id: 'x_1556735_dlhub_painel'
                         }
                     },
                     {

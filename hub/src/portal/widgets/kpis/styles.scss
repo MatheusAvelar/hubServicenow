@@ -1,0 +1,6 @@
+.dl-kpi { min-height: 140px; }
+.dl-kpi-label { font-size: 14px; color: var(--dl-text-2); font-weight: 600; }
+.dl-kpi-value { font-size: 32px; font-weight: 600; margin: 8px 0; line-height: 1.1; }
+.dl-kpi-sub { font-size: 14px; color: var(--dl-text-2); display: flex; align-items: center; gap: 6px; }
+.dl-kpi-sub svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.dl-kpi-warn { color: var(--dl-warn); background: var(--dl-warn-bg); border-radius: 6px; padding: 2px 8px; }
