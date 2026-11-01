@@ -39,5 +39,19 @@ gs.info(JSON.stringify(r.scoreAttempt([{ code: 'c1', points: 30, required: true 
 
 Esperado: `{"score":30,"max":30,"completed":true,...}`.
 
+## Depois do Hub completo (`DevLab_Hub_v1.xml`)
+
+Pode importar por cima da prova (mesmos sys_ids). Conferir:
+- menu **Dev Lab Hub**: Painel, Atividades, Importar JSON, Trilhas, Participantes, Matrículas, Log da API;
+- **Importar JSON** com `activities/LAB0001.json` → atividade em rascunho → **Publicar**;
+- `https://dev400642.service-now.com/devlab_hub` abre o Painel (KPIs, ranking, aguardando aprovação);
+- **System Web Services → Scripted REST APIs → Dev Lab**: 4 recursos em `/api/x_1556735_dlhub/devlab/v1/...`;
+- ACLs das tabelas `x_1556735_dlhub_*` (se não foram criadas sozinhas, me avise: incluo ACLs explícitas).
+
+## Agent (`DevLab_Agent_v1.xml`) — na PDI de teste
+
+Mesmo passo a passo. Depois: **System Applications → Application Cross-Scope Access**, filtro
+`x_1556735_dlagent`: 16 privilégios, todos *Allowed*. Abrir `/devlab` e seguir `docs/teste-ponta-a-ponta.md`.
+
 Se precisar desfazer: **System Applications → My Company Applications → Dev Lab Hub → Delete** (remove o app e
 a tabela), ou *Back Out* no update set em **Retrieved Update Sets**.
