@@ -50,7 +50,7 @@ UiAction({
     roles: [adminRole],
     order: 100,
     list: { showBannerButton: true, style: 'primary' },
-    script: `action.setRedirectURL('x_1556735_dlhub_import.do');`,
+    script: `action.setRedirectURL('x_1556735_dlhub_devlab.do#importar');`,
 })
 
 UiAction({

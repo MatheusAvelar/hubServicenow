@@ -5,9 +5,18 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    acl_page_devlab: {
+                        table: 'sys_security_acl'
+                        id: 'd68a73bb1b2048b8a5bbd503add2695c'
+                    }
                     acl_page_import: {
                         table: 'sys_security_acl'
                         id: 'df8ad84ade024f578513ba80d0380ee5'
+                        deleted: true
+                    }
+                    acl_rest_console: {
+                        table: 'sys_security_acl'
+                        id: '3c76a191fa314e23bda9473a5e166c4d'
                     }
                     acl_rest_devlab: {
                         table: 'sys_security_acl'
@@ -60,6 +69,7 @@ declare global {
                     mod_activities: {
                         table: 'sys_app_module'
                         id: 'ffb5ace10489454ba76f1808e30993df'
+                        deleted: true
                     }
                     mod_api_log: {
                         table: 'sys_app_module'
@@ -76,14 +86,17 @@ declare global {
                     mod_import: {
                         table: 'sys_app_module'
                         id: '3e0edf5992b0472483b3d9b628645065'
+                        deleted: true
                     }
                     mod_participants: {
                         table: 'sys_app_module'
                         id: 'dfc40a045b2a481099008ffbb00b862d'
+                        deleted: true
                     }
                     mod_tracks: {
                         table: 'sys_app_module'
                         id: '229f330f74b346868f38f5ca33efbf0a'
+                        deleted: true
                     }
                     package_json: {
                         table: 'sys_module'
@@ -92,6 +105,10 @@ declare global {
                     param_since: {
                         table: 'sys_ws_query_parameter'
                         id: '0daa4b5c4a7c4d7f90f1785d728867be'
+                    }
+                    rest_console: {
+                        table: 'sys_ws_definition'
+                        id: 'afdfd3e34898459cbf09f772d91c9d2d'
                     }
                     rest_devlab: {
                         table: 'sys_ws_definition'
@@ -104,6 +121,10 @@ declare global {
                     route_approve: {
                         table: 'sys_ws_operation'
                         id: '6e117c8d6a4a43419bf747384586cd3b'
+                    }
+                    route_console_run: {
+                        table: 'sys_ws_operation'
+                        id: '601a748466a643839be05ab5a08535ae'
                     }
                     route_ping: {
                         table: 'sys_ws_operation'
@@ -128,6 +149,10 @@ declare global {
                     si_devlab_api: {
                         table: 'sys_script_include'
                         id: 'b9251b74b02f4d0d944cade61352bcd4'
+                    }
+                    si_hub_console_service: {
+                        table: 'sys_script_include'
+                        id: 'b3acf65ded2e42659402ce706a4704bf'
                     }
                     si_hub_dashboard_service: {
                         table: 'sys_script_include'
@@ -157,6 +182,10 @@ declare global {
                         table: 'sys_module'
                         id: 'b18816ccf2f14f8fb1d7a9852f2fc952'
                     }
+                    'src_server_script-includes_HubConsoleService_server_js': {
+                        table: 'sys_module'
+                        id: 'c770748e25f1432ab785a16e84e9c46a'
+                    }
                     'src_server_script-includes_HubDashboardService_server_js': {
                         table: 'sys_module'
                         id: '1e39a120b5cf48c6bd921451f5dfefac'
@@ -169,9 +198,14 @@ declare global {
                         table: 'sys_module'
                         id: 'e570553cc4f74349b6e58e2b33c0898a'
                     }
+                    'src_server_ui-pages_devlab_client_js': {
+                        table: 'sys_module'
+                        id: 'd733cc45c9814e6198641e4051e76bdc'
+                    }
                     'src_server_ui-pages_import_processing_server_js': {
                         table: 'sys_module'
                         id: '6470942253694c68ac15ecfde5204f05'
+                        deleted: true
                     }
                     ua_archive: {
                         table: 'sys_ui_action'
@@ -192,62 +226,77 @@ declare global {
                     x_1556735_dlhub_header: {
                         table: 'sp_header_footer'
                         id: '418098e7b1314754a23261f5402db92d'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_c1: {
                         table: 'sp_container'
                         id: '6218121edad24f2faec9d9d5e2c10e51'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_i_awaiting: {
                         table: 'sp_instance'
                         id: '0a35e8938dbd4a948918e11644912e40'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_i_kpis: {
                         table: 'sp_instance'
                         id: '4b58e538d6794dba8685af8951dac061'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_i_ranking: {
                         table: 'sp_instance'
                         id: 'c537f7b4d7a24c2c9f70ec029df9b33d'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_r1: {
                         table: 'sp_row'
                         id: 'f232b6e2a8274ea48cf4e10c714890c1'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_r1c1: {
                         table: 'sp_column'
                         id: 'e5b437770f364768b9f9a75b0ea51681'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_r2: {
                         table: 'sp_row'
                         id: '6c8fead959b84484a702117d1a5c8f5c'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_r2c1: {
                         table: 'sp_column'
                         id: 'dfeec1dfe131460c8d1f848894a9efdb'
+                        deleted: true
                     }
                     x_1556735_dlhub_painel_r2c2: {
                         table: 'sp_column'
                         id: 'ef7eade3153e4e68972bd3eff19a0804'
+                        deleted: true
                     }
                     x_1556735_dlhub_portal: {
                         table: 'sp_portal'
                         id: 'ebae5439822647e290bbaf754b32fc1f'
+                        deleted: true
                     }
                     x_1556735_dlhub_theme: {
                         table: 'sp_theme'
                         id: '801e16e189094d62ab34f5f90d120322'
+                        deleted: true
                     }
                     x_1556735_dlhub_w_awaiting: {
                         table: 'sp_widget'
                         id: 'd64787a4128e466f99068af59b85789d'
+                        deleted: true
                     }
                     x_1556735_dlhub_w_kpis: {
                         table: 'sp_widget'
                         id: 'eaec0994717e40af9634bf34dc9f8bbf'
+                        deleted: true
                     }
                     x_1556735_dlhub_w_ranking: {
                         table: 'sp_widget'
                         id: 'e53335d94c0b45b4a1ea58398708cca9'
+                        deleted: true
                     }
                 }
                 composite: [
@@ -602,6 +651,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '14f8f9523eda40dc9766a963c296ecfd'
+                        key: {
+                            sys_security_acl: 'd68a73bb1b2048b8a5bbd503add2695c'
+                            sys_user_role: {
+                                id: '03ed2df861804bc3897eb22ab89818e1'
+                                key: {
+                                    name: 'x_1556735_dlhub.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_choice_set'
                         id: '185af8c480544289a1087f45444bc34b'
                         key: {
@@ -779,6 +841,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_page'
+                        id: '2098f05e477f4e45ad0b8cc8d1eb1787'
+                        key: {
+                            endpoint: 'x_1556735_dlhub_devlab.do'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '209bb7e373ea491095ccccd0426bad30'
                         key: {
@@ -953,6 +1022,19 @@ declare global {
                             }
                             element: '.end_split'
                             position: '5'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '2678719ccf234987909d7fe19c9a0df3'
+                        key: {
+                            sys_security_acl: '3c76a191fa314e23bda9473a5e166c4d'
+                            sys_user_role: {
+                                id: '03ed2df861804bc3897eb22ab89818e1'
+                                key: {
+                                    name: 'x_1556735_dlhub.admin'
+                                }
+                            }
                         }
                     },
                     {
@@ -1487,6 +1569,7 @@ declare global {
                     {
                         table: 'sys_security_acl_role'
                         id: '47a43330f9e84590af35ac4c1efb4000'
+                        deleted: true
                         key: {
                             sys_security_acl: 'df8ad84ade024f578513ba80d0380ee5'
                             sys_user_role: {
@@ -1963,6 +2046,7 @@ declare global {
                     {
                         table: 'sys_ui_page'
                         id: '667dbd67e8294b399bd33a9fb5fbf248'
+                        deleted: true
                         key: {
                             endpoint: 'x_1556735_dlhub_import.do'
                         }
@@ -2261,6 +2345,7 @@ declare global {
                     {
                         table: 'sp_page'
                         id: '7d44ae164ee84d2dbbe342613550009a'
+                        deleted: true
                         key: {
                             id: 'x_1556735_dlhub_painel'
                         }

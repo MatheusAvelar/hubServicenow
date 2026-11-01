@@ -75,3 +75,13 @@ ScriptInclude({
     description: 'Lógica dos endpoints /devlab/v1 (ping, activities, approve, results).',
     script: Now.include('../server/script-includes/DevLabApi.server.js'),
 })
+
+ScriptInclude({
+    $id: Now.ID['si_hub_console_service'],
+    name: 'HubConsoleService',
+    apiName: 'x_1556735_dlhub.HubConsoleService',
+    accessibleFrom: 'package_private',
+    active: true,
+    description: 'Backend da página única do Hub (x_1556735_dlhub_devlab.do): painel, atividades, importação, trilhas e participantes.',
+    script: Now.include('../server/script-includes/HubConsoleService.server.js'),
+})

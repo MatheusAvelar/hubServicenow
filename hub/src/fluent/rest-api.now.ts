@@ -1,6 +1,6 @@
 import '@servicenow/sdk/global'
 import { Acl, RestApi } from '@servicenow/sdk/core'
-import { agentRole } from './roles.now'
+import { adminRole, agentRole } from './roles.now'
 
 /*
  * API do Hub: /api/x_1556735_dlhub/devlab/v1/...
@@ -107,6 +107,43 @@ export const devlabApi = RestApi({
             ],
             script: `(function process(request, response) {
     new DevLabApi().handle('results', request, response);
+})(request, response);`,
+        },
+    ],
+})
+
+/*
+ * Backend da página única do Hub: POST /api/x_1556735_dlhub/console/v1/run com { action, params }.
+ * Só o instrutor (role admin do Hub), com a sessão da página (X-UserToken). Lógica no HubConsoleService.
+ */
+export const consoleApiAcl = Acl({
+    $id: Now.ID['acl_rest_console'],
+    name: 'x_1556735_dlhub.console_api',
+    type: 'rest_endpoint',
+    operation: 'execute',
+    decisionType: 'allow',
+    roles: [adminRole],
+    adminOverrides: true,
+    description: 'Só o instrutor chama o backend da página do Hub.',
+})
+
+export const consoleApi = RestApi({
+    $id: Now.ID['rest_console'],
+    name: 'Dev Lab Console',
+    serviceId: 'console',
+    shortDescription: 'Backend da página do Hub (somente instrutor).',
+    consumes: 'application/json',
+    produces: 'application/json',
+    enforceAcl: [consoleApiAcl],
+    routes: [
+        {
+            $id: Now.ID['route_console_run'],
+            name: 'run',
+            method: 'POST',
+            path: '/v1/run',
+            enforceAcl: [consoleApiAcl],
+            script: `(function process(request, response) {
+    new HubConsoleService().handle(request, response);
 })(request, response);`,
         },
     ],

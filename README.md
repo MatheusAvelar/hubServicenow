@@ -7,7 +7,7 @@ Nenhum script deste repositório fala com uma instância.
 | Pasta | O que é |
 |---|---|
 | `dist/` | Update Sets prontos para importar (ver [`docs/importar-updateset.md`](docs/importar-updateset.md)) |
-| `hub/` | Fonte do app `x_1556735_dlhub` (PDI do instrutor): atividades, checks, participantes, API, portal `/devlab_hub` |
+| `hub/` | Fonte do app `x_1556735_dlhub` (PDI do instrutor): atividades, checks, participantes, API, página única `x_1556735_dlhub_devlab.do` |
 | `agent/` | Fonte do app `x_1556735_dlagent` (PDI de cada dev): pull, outbox, setup, motor de checks, portal `/devlab` |
 | `activities/` | Atividades em JSON (a publicação é feita no Hub com "Importar JSON") |
 | `schemas/` | `activity.schema.json` |

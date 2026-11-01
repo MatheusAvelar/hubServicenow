@@ -2,7 +2,7 @@ import '@servicenow/sdk/global'
 import { ApplicationMenu, Record } from '@servicenow/sdk/core'
 import { adminRole } from './roles.now'
 
-/* Menu do navegador para o instrutor (cadastro administrativo). O painel fica no portal /devlab_hub. */
+/* Menu do navegador: a interface do instrutor é a página única x_1556735_dlhub_devlab.do. */
 
 export const hubMenu = ApplicationMenu({
     $id: Now.ID['menu_hub'],
@@ -16,68 +16,11 @@ Record({
     $id: Now.ID['mod_dashboard'],
     table: 'sys_app_module',
     data: {
-        title: 'Painel',
+        title: 'Dev Lab',
         application: hubMenu,
         link_type: 'DIRECT',
-        query: '/devlab_hub?id=x_1556735_dlhub_painel',
-        window_name: '_blank',
+        query: 'x_1556735_dlhub_devlab.do',
         order: 100,
-        roles: ['x_1556735_dlhub.admin'],
-        active: true,
-    },
-})
-
-Record({
-    $id: Now.ID['mod_activities'],
-    table: 'sys_app_module',
-    data: {
-        title: 'Atividades',
-        application: hubMenu,
-        link_type: 'LIST',
-        name: 'x_1556735_dlhub_activity',
-        order: 200,
-        roles: ['x_1556735_dlhub.admin'],
-        active: true,
-    },
-})
-
-Record({
-    $id: Now.ID['mod_import'],
-    table: 'sys_app_module',
-    data: {
-        title: 'Importar JSON',
-        application: hubMenu,
-        link_type: 'DIRECT',
-        query: 'x_1556735_dlhub_import.do',
-        order: 250,
-        roles: ['x_1556735_dlhub.admin'],
-        active: true,
-    },
-})
-
-Record({
-    $id: Now.ID['mod_tracks'],
-    table: 'sys_app_module',
-    data: {
-        title: 'Trilhas',
-        application: hubMenu,
-        link_type: 'LIST',
-        name: 'x_1556735_dlhub_track',
-        order: 300,
-        roles: ['x_1556735_dlhub.admin'],
-        active: true,
-    },
-})
-
-Record({
-    $id: Now.ID['mod_participants'],
-    table: 'sys_app_module',
-    data: {
-        title: 'Participantes',
-        application: hubMenu,
-        link_type: 'LIST',
-        name: 'x_1556735_dlhub_participant',
-        order: 400,
         roles: ['x_1556735_dlhub.admin'],
         active: true,
     },

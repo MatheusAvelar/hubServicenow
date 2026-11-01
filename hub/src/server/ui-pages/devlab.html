@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <style>
+        .dl { --bg: #F4F6F4; --card: #FFFFFF; --line: #E1E6E3; --text: #16201C; --muted: #56625D;
+            --accent: #1F6F5C; --accent-hover: #164F42; --accent-soft: #E3F1EC; --dark: #16201C;
+            --bad: #A12A1F; --bad-soft: #F6D9D5; --warn: #9A3A0B; --warn-soft: #FDEEDD; --new: #1E3A8A; --new-soft: #E0E8FB;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif; color: var(--text); background: var(--bg);
+            min-height: 100vh; font-size: 15px; line-height: 1.45; }
+        .dl * { box-sizing: border-box; }
+        .dl .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+        .dl-top { background: var(--dark); color: #FFFFFF; }
+        .dl-top-inner { max-width: 1200px; margin: 0 auto; padding: 14px 16px 0; }
+        .dl-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; }
+        .dl-seal { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,0.12); }
+        .dl-tabs { display: flex; gap: 4px; margin-top: 12px; overflow-x: auto; }
+        .dl-tab { background: transparent; color: #C9D3CE; border: 0; border-bottom: 3px solid transparent;
+            min-height: 44px; padding: 0 16px; font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .dl-tab:hover { color: #FFFFFF; }
+        .dl-tab[aria-selected=true] { color: #FFFFFF; border-bottom-color: #7FC8B4; }
+        .dl-main { max-width: 1200px; margin: 0 auto; padding: 20px 16px 48px; }
+        .dl-panel[hidden] { display: none; }
+        .dl-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+        .dl-card h2 { font-size: 17px; margin: 0 0 4px; }
+        .dl-card .dl-sub { color: var(--muted); margin: 0 0 14px; }
+        .dl-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+        .dl-head h2 { margin: 0; }
+        .dl-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .dl-cols { display: grid; gap: 16px; grid-template-columns: 2fr 1fr; align-items: start; }
+        .dl-kpi { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+        .dl-kpi-label { color: var(--muted); font-size: 13px; font-weight: 600; }
+        .dl-kpi-value { font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; margin: 4px 0; }
+        .dl-kpi-sub { color: var(--muted); font-size: 13px; }
+        .dl-scroll { overflow-x: auto; }
+        .dl table { width: 100%; border-collapse: collapse; }
+        .dl th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+            padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+        .dl td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+        .dl tr:last-child td { border-bottom: 0; }
+        .dl-btn { min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent);
+            color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .dl-btn:hover { background: var(--accent-hover); }
+        .dl-btn:disabled { opacity: .55; cursor: default; }
+        .dl-btn.sec { background: #FFFFFF; color: var(--accent); }
+        .dl-btn.sec:hover { background: var(--accent-soft); }
+        .dl-btn.danger { background: #FFFFFF; color: var(--bad); border-color: var(--bad); }
+        .dl-btn.small { min-height: 36px; padding: 0 12px; font-size: 14px; }
+        .dl-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dl-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+        .dl-badge.draft { background: #EEF1EF; color: var(--muted); }
+        .dl-badge.published { background: var(--accent-soft); color: var(--accent-hover); }
+        .dl-badge.archived { background: var(--warn-soft); color: var(--warn); }
+        .dl-badge.warn { background: var(--warn-soft); color: var(--warn); }
+        .dl-badge.new { background: var(--new-soft); color: var(--new); }
+        .dl-avatar { display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-hover);
+            align-items: center; justify-content: center; font-weight: 700; font-size: 13px; margin-right: 8px; flex: none; }
+        .dl-who { display: flex; align-items: center; }
+        .dl-bar { height: 8px; background: #EEF1EF; border-radius: 999px; min-width: 80px; overflow: hidden; }
+        .dl-bar span { display: block; height: 100%; background: var(--accent); }
+        .dl-list { list-style: none; margin: 0; padding: 0; }
+        .dl-list li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+        .dl-list li:last-child { border-bottom: 0; }
+        .dl-muted { color: var(--muted); }
+        .dl-empty { color: var(--muted); padding: 12px 0; margin: 0; }
+        .dl-field { display: flex; flex-direction: column; gap: 4px; }
+        .dl-field label { font-size: 13px; font-weight: 600; color: var(--muted); }
+        .dl input[type=text], .dl input[type=number], .dl input[type=email], .dl input[type=url], .dl textarea {
+            font: inherit; color: var(--text); border: 1px solid #C9D1CD; border-radius: 8px; padding: 0 12px; min-height: 44px; background: #FFFFFF; width: 100%; }
+        .dl textarea { padding: 12px; min-height: 360px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; resize: vertical; }
+        .dl input:focus, .dl textarea:focus, .dl button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .dl-form { display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: end; }
+        .dl-steps { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; padding: 0; list-style: none; color: var(--muted); font-size: 14px; }
+        .dl-steps li { background: #EEF1EF; border-radius: 999px; padding: 4px 12px; }
+        .dl-msg { border-radius: 8px; padding: 12px 14px; margin: 12px 0 0; }
+        .dl-msg.ok { background: var(--accent-soft); color: var(--accent-hover); }
+        .dl-msg.err { background: var(--bad-soft); color: var(--bad); }
+        .dl-msg ul { margin: 6px 0 0; padding-left: 20px; }
+        .dl-token { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+        .dl-token code { background: #FFFFFF; border: 1px dashed var(--accent); border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+        .dl-summary { display: grid; gap: 8px 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 8px; }
+        .dl-summary div span { display: block; font-size: 12px; color: var(--muted); }
+        .dl-toast { position: fixed; right: 16px; bottom: 16px; max-width: 420px; z-index: 1000; }
+        .dl-file { position: absolute; width: 1px; height: 1px; opacity: 0; }
+        @media (max-width: 900px) {
+            .dl-grid, .dl-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .dl-cols, .dl-form { grid-template-columns: 1fr; }
+        }
+    </style>
+    <div class="dl" id="dl-app">
+        <header class="dl-top">
+            <div class="dl-top-inner">
+                <div class="dl-brand">
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 3h6"></path>
+                        <path d="M10 3v6l-5.5 9.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"></path>
+                        <path d="M7.5 15h9"></path>
+                    </svg>
+                    <span>Dev Lab</span>
+                    <span class="dl-seal">Hub · Instrutor</span>
+                </div>
+                <nav class="dl-tabs" role="tablist" aria-label="Seções do Hub">
+                    <button type="button" class="dl-tab" role="tab" id="tab-painel" data-tab="painel" aria-controls="panel-painel">Painel</button>
+                    <button type="button" class="dl-tab" role="tab" id="tab-atividades" data-tab="atividades" aria-controls="panel-atividades">Atividades</button>
+                    <button type="button" class="dl-tab" role="tab" id="tab-importar" data-tab="importar" aria-controls="panel-importar">Importar JSON</button>
+                    <button type="button" class="dl-tab" role="tab" id="tab-trilhas" data-tab="trilhas" aria-controls="panel-trilhas">Trilhas</button>
+                    <button type="button" class="dl-tab" role="tab" id="tab-participantes" data-tab="participantes" aria-controls="panel-participantes">Participantes</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="dl-main">
+            <section class="dl-panel" id="panel-painel" role="tabpanel" aria-labelledby="tab-painel" hidden="hidden">
+                <div class="dl-grid" id="dl-kpis"></div>
+                <div class="dl-cols" style="margin-top: 16px;">
+                    <div class="dl-card">
+                        <div class="dl-head">
+                            <h2>Ranking</h2>
+                            <button type="button" class="dl-btn sec small" id="dl-csv">Exportar CSV</button>
+                        </div>
+                        <div id="dl-ranking"></div>
+                    </div>
+                    <div class="dl-card">
+                        <h2>Aguardando aprovação</h2>
+                        <p class="dl-sub" id="dl-awaiting-sub"></p>
+                        <div id="dl-awaiting"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dl-panel" id="panel-atividades" role="tabpanel" aria-labelledby="tab-atividades" hidden="hidden">
+                <div class="dl-card">
+                    <div class="dl-head">
+                        <div>
+                            <h2>Atividades</h2>
+                            <p class="dl-sub" style="margin: 0;">Rascunhos não aparecem para os devs. Publique quando estiver pronta.</p>
+                        </div>
+                        <button type="button" class="dl-btn" data-go="importar">Nova atividade (JSON)</button>
+                    </div>
+                    <div id="dl-activities"></div>
+                </div>
+            </section>
+
+            <section class="dl-panel" id="panel-importar" role="tabpanel" aria-labelledby="tab-importar" hidden="hidden">
+                <div class="dl-card">
+                    <h2>Importar atividade</h2>
+                    <ol class="dl-steps">
+                        <li>1. Cole o JSON ou escolha o arquivo</li>
+                        <li>2. Valide</li>
+                        <li>3. Importe como rascunho ou já publique</li>
+                    </ol>
+                    <div class="dl-actions" style="margin-bottom: 12px;">
+                        <label class="dl-btn sec small" for="dl-file">Escolher arquivo .json</label>
+                        <input type="file" id="dl-file" class="dl-file" accept=".json,application/json" />
+                        <button type="button" class="dl-btn sec small" id="dl-clear">Limpar</button>
+                    </div>
+                    <label for="dl-json" class="dl-muted" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">JSON da atividade</label>
+                    <textarea id="dl-json" spellcheck="false" placeholder="Cole aqui o conteúdo de activities/LAB0001.json"></textarea>
+                    <div id="dl-validation"></div>
+                    <div class="dl-actions" style="margin-top: 12px;">
+                        <button type="button" class="dl-btn sec" id="dl-validate">Validar</button>
+                        <button type="button" class="dl-btn sec" id="dl-import-draft" disabled="disabled">Importar como rascunho</button>
+                        <button type="button" class="dl-btn" id="dl-import-publish" disabled="disabled">Importar e publicar</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dl-panel" id="panel-trilhas" role="tabpanel" aria-labelledby="tab-trilhas" hidden="hidden">
+                <div class="dl-card">
+                    <h2>Nova trilha</h2>
+                    <p class="dl-sub">Trilhas também são criadas automaticamente ao importar uma atividade com trilha nova.</p>
+                    <form class="dl-form" id="dl-track-form" novalidate="novalidate">
+                        <div class="dl-field" style="grid-column: span 2;">
+                            <label for="dl-track-name">Nome</label>
+                            <input type="text" id="dl-track-name" maxlength="100" required="required" />
+                        </div>
+                        <div class="dl-field">
+                            <label for="dl-track-order">Ordem</label>
+                            <input type="number" id="dl-track-order" value="100" />
+                        </div>
+                        <div><button type="submit" class="dl-btn">Adicionar trilha</button></div>
+                    </form>
+                </div>
+                <div class="dl-card">
+                    <h2>Trilhas</h2>
+                    <div id="dl-tracks"></div>
+                </div>
+            </section>
+
+            <section class="dl-panel" id="panel-participantes" role="tabpanel" aria-labelledby="tab-participantes" hidden="hidden">
+                <div class="dl-card">
+                    <h2>Novo participante</h2>
+                    <p class="dl-sub">O token aparece uma única vez: copie e entregue ao dev para configurar o Agent.</p>
+                    <form class="dl-form" id="dl-part-form" novalidate="novalidate">
+                        <div class="dl-field">
+                            <label for="dl-part-name">Nome</label>
+                            <input type="text" id="dl-part-name" maxlength="100" required="required" />
+                        </div>
+                        <div class="dl-field">
+                            <label for="dl-part-email">E-mail</label>
+                            <input type="email" id="dl-part-email" maxlength="100" />
+                        </div>
+                        <div class="dl-field">
+                            <label for="dl-part-url">URL da PDI</label>
+                            <input type="url" id="dl-part-url" maxlength="255" placeholder="https://devNNNNN.service-now.com" />
+                        </div>
+                        <div><button type="submit" class="dl-btn">Cadastrar</button></div>
+                    </form>
+                    <div id="dl-token-box"></div>
+                </div>
+                <div class="dl-card">
+                    <h2>Participantes</h2>
+                    <div id="dl-participants"></div>
+                </div>
+            </section>
+        </main>
+        <div class="dl-toast" id="dl-toast" role="status" aria-live="polite"></div>
+    </div>
+</j:jelly>

@@ -269,8 +269,10 @@ function build(appKey, profileKey) {
         const id = sysId(`devlab-update:${fileBase}:${pkg.version}:${r.name}`);
         const guid = sysId(`devlab-guid:${r.name}:${crypto.createHash('sha1').update(r.payload).digest('hex')}`);
         const when = snDate(new Date(baseMs + i * 1000));
+        // Registro removido do código: o SDK grava action="DELETE" no payload e o update set precisa refletir isso.
+        const action = /^\s*<record_update[^>]*>\s*<[a-z0-9_]+ action="DELETE"/.test(r.payload) ? 'DELETE' : 'INSERT_OR_UPDATE';
         parts.push('<sys_update_xml action="INSERT_OR_UPDATE">');
-        parts.push(tag('action', 'INSERT_OR_UPDATE'));
+        parts.push(tag('action', action));
         parts.push(tag('application', cfg.scopeId, appRef));
         parts.push(tag('category', 'customer'));
         parts.push(tag('comments', ''));

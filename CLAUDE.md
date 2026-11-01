@@ -85,7 +85,7 @@ hubServicenow/         # repositório (github.com/MatheusAvelar/hubServicenow)
   `[object Object]` no XML.
 - UI Pages (Jelly): o build reformata atributos para aspas duplas — nunca usar aspas duplas dentro de um
   atributo (ex.: `placeholder='{ "a": 1 }'`), senão o Jelly fica inválido e a página abre em branco.
-- Não usar `dynamicTitleStructure` nas páginas do portal (`${portal.title}` aparece literal no título).
+- Não usar `dynamicTitleStructure` nas páginas de portal (`${portal.title}` aparece literal no título).
 - Código, nomes de campos e comentários em inglês; labels, mensagens e textos de UI em português.
 - Toda lógica de servidor em Script Includes testáveis; Business Rules/REST/UI Actions só orquestram.
 - Versionar: cada atividade tem `version`; o Agent informa `agent_version` em toda chamada.
@@ -238,10 +238,10 @@ Testar cedo (Fase 1) a leitura de cada tabela usada pelos checks.
 
 ## Interface
 
-Service Portal nos dois lados. Os forms clássicos ficam só para o cadastro administrativo
-(trilhas, atividades, checks, participantes) no Hub.
+Hub: uma UI Page única (abaixo). Agent: Service Portal `/devlab`. Os forms clássicos do Hub ficam só como apoio
+("Abrir registro"), não como fluxo principal.
 
-### Identidade visual (igual nos dois portais)
+### Identidade visual (igual na página do Hub e no portal do Agent)
 - Fontes: IBM Plex Sans (texto) e IBM Plex Mono (números, códigos LAB0001, pontos). Fallback: system-ui / monospace.
 - Cores: fundo `#F4F6F4`; cards `#FFFFFF`, borda `#E1E6E3`, raio 12px; texto `#16201C`; texto secundário `#56625D`;
   accent `#1F6F5C` (hover `#164F42`); accent suave `#E3F1EC`; header do Hub `#16201C`.
@@ -256,27 +256,26 @@ Service Portal nos dois lados. Os forms clássicos ficam só para o cadastro adm
 - Status nunca só por cor: sempre com ícone ou texto. Botões com no mínimo 44px de altura. Contraste de texto ≥ 4.5:1.
 - Responsivo: colunas empilham em tela estreita; tabelas largas rolam horizontalmente dentro do card.
 - Sem emojis e sem gradientes; ícones em SVG inline de traço. Todos os textos de UI em português.
-- CSS em tema / CSS include compartilhado por portal, com as cores como variáveis CSS.
+- Cores como variáveis CSS (tema do portal do Agent e `.dl` da página do Hub; teste em `tests/agent-rules.test.js`).
 
-### Portal do Hub — URL `/devlab_hub`, acesso só para a role `x_<prefixo>_dlhub.admin`
-Página **Painel**:
-- **Header** escuro com o logo "Dev Lab", o selo "Hub · Instrutor", a navegação (Painel, Atividades, Trilhas,
-  Participantes) e o botão "Nova atividade" (abre o form clássico de activity).
-- **Filtro de trilha** (select), que filtra os widgets abaixo.
-- **KPIs** (4 cards):
-  - Devs ativos (sub: "N sem sincronizar há mais de 3 dias");
-  - Atividades publicadas (sub: "em N trilhas");
-  - Conclusão média (%);
-  - Aguardando aprovação (na última atividade publicada).
-- **Ranking**: tabela com posição, avatar de iniciais + nome, pontos, concluídas "X de Y", barra de progresso e
-  última sincronização ("há 12 min"). Badge de alerta para quem está há mais de 3 dias sem sincronizar.
-  Botão "Exportar CSV".
-- **Checks com mais falhas**: top 3 com código da atividade, nome do check, % de reprovação e barra.
-- **Aguardando aprovação**: devs que não aprovaram a última atividade publicada, com há quanto tempo foi publicada.
-- **Mapa de calor da atividade selecionada**:
-  - linhas = devs; colunas = checks (cabeçalho "c1 · nome (pontos)"); coluna final com o total;
-  - célula = status do check na última tentativa;
-  - trocar a atividade pela lista de atividades.
+### Página do Hub — `x_1556735_dlhub_devlab.do` (UI Page única), só para a role `x_<prefixo>_dlhub.admin`
+O Hub **não tem Service Portal**: toda a interface do instrutor é uma UI Page simples com abas (menu "Dev Lab Hub → Dev Lab").
+- Fonte: `hub/src/server/ui-pages/devlab.html` (Jelly, só marcação/CSS) + `devlab.client.js` (ES5, DOM puro, textos
+  sempre por `textContent`). Sem `<script>` no Jelly.
+- Backend: `POST /api/x_1556735_dlhub/console/v1/run` com `{ action, params }` e a sessão da página (`X-UserToken: g_ck`);
+  ACL `x_1556735_dlhub.console_api` (role admin). Lógica no `HubConsoleService` (lista branca de ações; regras nos
+  serviços de sempre).
+- Abas:
+  - **Painel**: 4 KPIs (devs ativos/sem sincronizar há 3 dias, publicadas/trilhas, conclusão média, aguardando aprovação),
+    ranking (posição, iniciais + nome, pontos, "X de Y", barra, última sincronização, badge Inativo) com "Exportar CSV",
+    e "Aguardando aprovação" da última publicada;
+  - **Atividades**: tabela com estado, versão, checks e pontos; ações Publicar/Arquivar, "Editar JSON" (carrega na aba
+    Importar) e "Abrir registro" (form clássico, para ajustes finos);
+  - **Importar JSON**: colar ou escolher arquivo → **Validar** (mostra erros ou o resumo: cria/atualiza, versão, checks,
+    pontos) → "Importar como rascunho" ou "Importar e publicar". Mudar o texto depois de validar exige validar de novo;
+  - **Trilhas**: criar, renomear, ativar/desativar;
+  - **Participantes**: cadastrar (o token aparece uma vez, com botão Copiar), novo token, ativar/desativar.
+- Fase 2 (na mesma página): filtro de trilha, checks com mais falhas, mapa de calor dev × check.
 
 ### Portal do Agent (PDI do dev) — URL `/devlab`
 Página **Minhas Atividades**:
@@ -300,7 +299,7 @@ Página **Minhas Atividades**:
   - Botões "Validar" (ou "Validar novamente") e "Ver dica (−N pts)". A dica pede confirmação antes de descontar.
   - Atividade Nova: mostra o enunciado e os critérios sem status, com o botão "Aprovar e instalar".
 
-### Regras de implementação da UI
+### Regras de implementação da UI (portal do Agent)
 - Widgets (HTML, CSS, client e server script) versionados no repositório. Verificar se a versão do SDK/Fluent em uso
   tem suporte nativo a `sp_portal`, `sp_page`, `sp_widget` e `sp_instance`; se não tiver, declarar esses registros
   pelo mecanismo genérico de registros do Fluent (Record). Confirmar na documentação oficial; não presumir.
@@ -315,7 +314,7 @@ Página **Minhas Atividades**:
 
 **Fase 1 — MVP**
 - Hub: tabelas, roles, API (`ping`, `activities`, `approve`, `results`), cálculo de pontos.
-- Portal do Hub: KPIs, ranking e "Aguardando aprovação".
+- Página do Hub: KPIs, ranking e "Aguardando aprovação"; atividades, importação, trilhas e participantes.
 - Agent: propriedades, pull, outbox com retry, motor com `record_exists`, `business_rule`, `script_not_contains`.
 - Portal do Agent completo: card de pontuação, lista, detalhe, "Aprovar e instalar", "Validar", "Sincronizar agora".
 - Publicação no Hub: UI Action "Publicar" + "Importar JSON" (`ActivityImportService`) + 2 atividades piloto
@@ -327,7 +326,7 @@ Página **Minhas Atividades**:
 
 **Fase 2**
 - Demais tipos de check, `atf_passed`, dicas com custo, prazo/expiração, max_attempts, notificações por e-mail.
-- Portal do Hub: mapa de calor dev × check, checks com mais falhas, filtro de trilha, exportar CSV.
+- Página do Hub: mapa de calor dev × check, checks com mais falhas, filtro de trilha, exportar CSV.
 
 **Fase 3**
 - Trilhas completas, níveis/badges, relatório individual por dev (para 1:1).

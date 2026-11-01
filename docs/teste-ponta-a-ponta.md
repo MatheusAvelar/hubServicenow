@@ -1,12 +1,11 @@
 # Teste ponta a ponta — Fase 1
 
 Hub: `dev400642.service-now.com` (PDI do instrutor). Dev de teste: uma segunda PDI.
-Tudo é instalado por **Update Set XML** (`dist/`), importado manualmente — ver `docs/importar-updateset.md`.
+O Hub vai por deploy direto (`npm run hub:deploy`) ou por **Update Set XML** (`dist/`); o Agent sempre por Update Set — ver `docs/importar-updateset.md`.
 
 ## 0. Pré-checagens (antes do primeiro import)
 
 Na PDI do Hub, confirme que estão livres (listas vazias):
-- `sp_portal.list` com filtro *URL suffix = devlab_hub*;
 - `sys_scope.list` com filtro *Scope starts with x_1556735_* (exceto se o pacote de prova já foi importado).
 
 Na PDI de teste, `sp_portal.list` com *URL suffix = devlab*. O Preview do update set também acusa colisões.
@@ -17,9 +16,10 @@ Na PDI de teste, `sp_portal.list` com *URL suffix = devlab*. O Preview do update
 2. Criar o usuário de integração (ex.: `devlab.agent`), marcar **Web service access only**, dar a role
    `x_1556735_dlhub.agent` e definir a senha.
 3. Dar `x_1556735_dlhub.admin` ao instrutor.
-4. **Dev Lab Hub → Participantes → Novo**: nome/e-mail do dev de teste → salvar → **copiar o token** (aparece uma vez).
-5. **Importar JSON**: colar `activities/LAB0001.json` e depois `LAB0002.json` → abrir cada uma → **Publicar**.
-6. Abrir `/devlab_hub`: KPIs com 2 publicadas, ranking com o dev (0 pts, "nunca"), "Aguardando aprovação" com o dev.
+4. **Dev Lab Hub → Dev Lab** (`x_1556735_dlhub_devlab.do`) → aba **Participantes**: nome/e-mail do dev de teste →
+   Cadastrar → **Copiar token** (aparece uma vez).
+5. Aba **Importar JSON**: escolher `activities/LAB0001.json` → Validar → **Importar e publicar**; repetir com `LAB0002.json`.
+6. Aba **Painel**: KPIs com 2 publicadas, ranking com o dev (0 pts, "nunca"), "Aguardando aprovação" com o dev.
 
 ## 2. Agent na PDI de teste
 
@@ -40,7 +40,7 @@ Na PDI de teste, `sp_portal.list` com *URL suffix = devlab*. O Preview do update
 
 ## 4. Aceite 2 — pontuação no ranking do Hub
 
-- `/devlab_hub`: o dev com 100 pts, "1 de 2" concluídas, última sincronização "agora".
+- Página do Hub, aba Painel: o dev com 100 pts, "1 de 2" concluídas, última sincronização "agora".
 - Hub: **Matrículas** → LAB0001 com score 100, attempts 3, state completed. **Log da API** com as chamadas (200).
 - Agent: card de pontuação com 100 pts e posição 1º (vindos do Hub).
 

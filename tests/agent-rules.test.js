@@ -115,7 +115,26 @@ test('tipos de check: tudo que o Hub publica o Agent executa', () => {
     for (const type of hub) assert.match(engine, new RegExp(`${type}: this\\.`), `CheckEngine não trata ${type}`);
 });
 
-test('os dois portais usam as mesmas variáveis de tema', () => {
-    const vars = (f) => fs.readFileSync(path.join(__dirname, '..', f), 'utf8').match(/:root \{[\s\S]*?\}/)[0];
-    assert.equal(vars('hub/src/portal/theme.scss'), vars('agent/src/portal/theme.scss'));
+test('a página do Hub usa as mesmas cores do portal do Agent', () => {
+    const read = (f) => fs.readFileSync(path.join(__dirname, '..', f), 'utf8');
+    const agent = read('agent/src/portal/theme.scss').match(/:root \{[\s\S]*?\}/)[0];
+    const page = read('hub/src/server/ui-pages/devlab.html');
+    const pick = (p) => p.replace(/^\./, ''); // .dl { --bg: ... }
+    const pairs = { bg: 'dl-bg', card: 'dl-card', line: 'dl-border', text: 'dl-text', muted: 'dl-text-2', accent: 'dl-accent',
+        'accent-hover': 'dl-accent-hover', 'accent-soft': 'dl-accent-soft', dark: 'dl-header', bad: 'dl-fail', 'bad-soft': 'dl-fail-bg',
+        warn: 'dl-warn', 'warn-soft': 'dl-warn-bg', new: 'dl-new', 'new-soft': 'dl-new-bg' };
+    for (const [hubVar, agentVar] of Object.entries(pairs)) {
+        const h = page.match(new RegExp(`--${pick(hubVar)}: (#[0-9A-Fa-f]{6})`));
+        const a = agent.match(new RegExp(`--${agentVar}: (#[0-9A-Fa-f]{6})`));
+        assert.ok(h && a, `variável ${hubVar}/${agentVar} não encontrada`);
+        assert.equal(h[1].toUpperCase(), a[1].toUpperCase(), `cor diferente em ${hubVar}`);
+    }
+});
+
+test('página do Hub: Jelly válido e sem script inline', () => {
+    const page = fs.readFileSync(path.join(__dirname, '..', 'hub/src/server/ui-pages/devlab.html'), 'utf8');
+    assert.doesNotMatch(page, /<script/i, 'o JS fica em devlab.client.js');
+    // Atributos não podem conter aspas duplas aninhadas (o build reescreve tudo com aspas duplas).
+    assert.doesNotMatch(page, /="[^"]*'[^']*"[^']*'[^"]*"/);
+    assert.match(page, /^<\?xml[\s\S]*<j:jelly[\s\S]*<\/j:jelly>\s*$/);
 });
