@@ -159,3 +159,21 @@ test('AGENT_VERSION informado ao Hub é a versão do package.json do Agent', () 
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'agent/package.json'), 'utf8'));
     assert.match(rules, new RegExp(`AGENT_VERSION = '${pkg.version.replace(/\./g, '\\.')}'`));
 });
+
+test('classify aceita resposta embrulhada em {"result": ...} e a crua', () => {
+    const { loadScriptInclude } = require('../scripts/load-script-include');
+    const AgentRules = loadScriptInclude('agent/src/server/script-includes/AgentRules.server.js', 'AgentRules');
+    const r = new AgentRules();
+    const raw = r.classify(200, 'application/json', JSON.stringify({ activities: [{ number: 'LAB0001' }] }));
+    const wrapped = r.classify(200, 'application/json', JSON.stringify({ result: { activities: [{ number: 'LAB0001' }] } }));
+    assert.equal(raw.json.activities.length, 1);
+    assert.equal(wrapped.json.activities.length, 1);
+    const err = r.classify(401, 'application/json', JSON.stringify({ result: { error: { code: 'invalid_token', message: 'x' } } }));
+    assert.match(err.message, /401/);
+    assert.equal(err.json.error.code, 'invalid_token');
+});
+
+test('API do Dev Lab não usa setBody (que embrulha em result)', () => {
+    const src = fs.readFileSync(path.join(__dirname, '..', 'hub/src/server/script-includes/DevLabApi.server.js'), 'utf8');
+    assert.doesNotMatch(src, /response\.setBody\(/);
+});

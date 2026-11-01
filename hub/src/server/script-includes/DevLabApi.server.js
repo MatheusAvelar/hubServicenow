@@ -50,7 +50,8 @@ DevLabApi.prototype = {
         this.logger.log(participant ? participant.getUniqueValue() : null, label, out.summary || '', out.status);
         response.setStatus(out.status);
         response.setContentType('application/json');
-        response.setBody(out.body);
+        // JSON cru, como no contrato: setBody(objeto) embrulharia tudo em {"result": ...}.
+        response.getStreamWriter().writeString(JSON.stringify(out.body));
     },
 
     // ---------------------------------------------------------------- rotas

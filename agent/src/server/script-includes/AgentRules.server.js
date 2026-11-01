@@ -3,7 +3,7 @@
  */
 var AgentRules = Class.create();
 
-AgentRules.AGENT_VERSION = '1.1.2';
+AgentRules.AGENT_VERSION = '1.1.3';
 
 /** Backoff do outbox: 15 min, 30, 60, 120… até 12 h. */
 AgentRules.BACKOFF_BASE_MIN = 15;
@@ -31,6 +31,10 @@ AgentRules.prototype = {
             } catch (e) {
                 json = null;
             }
+        }
+        // Hub antigo (setBody de objeto) responde {"result": {...}}: desembrulha.
+        if (json && typeof json === 'object' && json.result && typeof json.result === 'object' && Object.keys(json).length === 1) {
+            json = json.result;
         }
         var looksHtml = /^\s*</.test(text);
         if (code === 0) return { kind: 'transient', json: null, message: 'Hub sem resposta (hibernando ou fora do ar).' };
