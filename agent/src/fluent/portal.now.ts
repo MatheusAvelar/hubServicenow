@@ -32,7 +32,6 @@ export const homePage = SPPage({
     public: false,
     draft: false,
     roles: [userRole],
-    dynamicTitleStructure: 'Minhas Atividades - ${portal.title}',
     containers: [
         {
             $id: Now.ID['x_1556735_dlagent_home_c1'],

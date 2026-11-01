@@ -73,7 +73,6 @@ export const painelPage = SPPage({
     public: false,
     draft: false,
     roles: [adminRole],
-    dynamicTitleStructure: 'Painel - ${portal.title}',
     containers: [
         {
             $id: Now.ID['x_1556735_dlhub_painel_c1'],

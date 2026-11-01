@@ -68,6 +68,9 @@ hubServicenow/         # repositório (github.com/MatheusAvelar/hubServicenow)
   `npx now-sdk explain <tópico>`. (`now-sdk pack` gera pacote de app, não Update Set — não usar.)
 - Em `Record({...})` genérico, roles vão como texto (`roles: ['x_1556735_dlhub.admin']`): objeto `Role` vira
   `[object Object]` no XML.
+- UI Pages (Jelly): o build reformata atributos para aspas duplas — nunca usar aspas duplas dentro de um
+  atributo (ex.: `placeholder='{ "a": 1 }'`), senão o Jelly fica inválido e a página abre em branco.
+- Não usar `dynamicTitleStructure` nas páginas do portal (`${portal.title}` aparece literal no título).
 - Código, nomes de campos e comentários em inglês; labels, mensagens e textos de UI em português.
 - Toda lógica de servidor em Script Includes testáveis; Business Rules/REST/UI Actions só orquestram.
 - Versionar: cada atividade tem `version`; o Agent informa `agent_version` em toda chamada.

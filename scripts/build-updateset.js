@@ -224,7 +224,8 @@ function build(appKey, profileKey) {
     const title = profile ? profile.title : `Dev Lab ${app.label} v${pkg.version}`;
     const description = profile ? profile.description
         : `Dev Lab ${app.label} (${cfg.scope}) versão ${pkg.version}. Gerado por scripts/build-updateset.js a partir de ${app.dir}/src.`;
-    const setId = sysId(`devlab-updateset:${fileBase}`);
+    // Cada versão é um update set novo (reimportar a mesma versão colidiria com o já commitado).
+    const setId = sysId(`devlab-updateset:${fileBase}:${pkg.version}`);
     const now = new Date();
     const stamp = snDate(now);
     const appRef = { display_value: cfg.name };
@@ -265,7 +266,7 @@ function build(appKey, profileKey) {
 
     const baseMs = now.getTime();
     records.forEach((r, i) => {
-        const id = sysId(`devlab-update:${fileBase}:${r.name}`);
+        const id = sysId(`devlab-update:${fileBase}:${pkg.version}:${r.name}`);
         const guid = sysId(`devlab-guid:${r.name}:${crypto.createHash('sha1').update(r.payload).digest('hex')}`);
         const when = snDate(new Date(baseMs + i * 1000));
         parts.push('<sys_update_xml action="INSERT_OR_UPDATE">');
