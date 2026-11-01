@@ -95,7 +95,7 @@ test('allowlist do setup: Hub = Agent = privilégios de create', () => {
     const hub = staticArray('hub/src/server/script-includes/ActivityValidator.server.js', 'ActivityValidator.SETUP_TABLE_ALLOWLIST');
     const agent = staticArray('agent/src/server/script-includes/SetupEngine.server.js', 'SetupEngine.TABLE_ALLOWLIST');
     assert.deepEqual(hub, agent);
-    assert.deepEqual(privileges('create').filter((t) => t !== 'sys_properties'), agent);
+    assert.deepEqual(privileges('create'), agent);
 });
 
 test('tabelas do record_exists: Hub = Agent = privilégios de leitura', () => {
@@ -137,4 +137,10 @@ test('página do Hub: Jelly válido e sem script inline', () => {
     // Atributos não podem conter aspas duplas aninhadas (o build reescreve tudo com aspas duplas).
     assert.doesNotMatch(page, /="[^"]*'[^']*"[^']*'[^"]*"/);
     assert.match(page, /^<\?xml[\s\S]*<j:jelly[\s\S]*<\/j:jelly>\s*$/);
+});
+
+test('configuração do Agent não grava em sys_properties (global recusa criação vinda do escopo)', () => {
+    const src = fs.readFileSync(path.join(__dirname, '..', 'agent/src/server/script-includes/AgentConfig.server.js'), 'utf8');
+    assert.doesNotMatch(src, /GlideRecord\('sys_properties'\)/);
+    assert.deepEqual(privileges('write').filter((t) => t === 'sys_properties'), []);
 });

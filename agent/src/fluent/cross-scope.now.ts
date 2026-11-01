@@ -7,7 +7,7 @@ import { CrossScopePrivilege } from '@servicenow/sdk/core'
  *
  * LEITURA (motor de checks): metadados que o dev constrói + tabelas do record_exists.
  * CRIAÇÃO (setup): só a allowlist do SetupEngine — nunca metadados.
- * sys_properties: leitura/gravação apenas das propriedades do próprio Agent (AgentConfig).
+ * sys_properties: só leitura (valores padrão hub_url/hub_user). A configuração do dev fica em x_1556735_dlagent_config.
  */
 
 // ---- Leitura: metadados avaliados pelos checks
@@ -31,5 +31,3 @@ CrossScopePrivilege({ $id: Now.ID['csp_create_incident'], status: 'allowed', ope
 
 // ---- Propriedades do próprio Agent (AgentConfig)
 CrossScopePrivilege({ $id: Now.ID['csp_read_sys_properties'], status: 'allowed', operation: 'read', targetName: 'sys_properties', targetScope: 'global', targetType: 'sys_db_object' })
-CrossScopePrivilege({ $id: Now.ID['csp_write_sys_properties'], status: 'allowed', operation: 'write', targetName: 'sys_properties', targetScope: 'global', targetType: 'sys_db_object' })
-CrossScopePrivilege({ $id: Now.ID['csp_create_sys_properties'], status: 'allowed', operation: 'create', targetName: 'sys_properties', targetScope: 'global', targetType: 'sys_db_object' })

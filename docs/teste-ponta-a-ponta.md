@@ -72,6 +72,6 @@ a resposta não será o JSON do Dev Lab e deve cair no mesmo caminho de falha tr
 - [ ] `gs.getProperty` devolve o valor decifrado de propriedade password2 no escopo (senão: plano B do CLAUDE.md).
 - [ ] Leitura de `sys_script`, `sys_script_include` e `sys_script_client` a partir do escopo do Agent.
 - [ ] Criação em `sys_user` / `sys_user_group` pelo setup.
-- [ ] Criação de `sys_properties` privadas do Agent pela tela de configuração.
+- [ ] "Configurar Agent" grava em `x_1556735_dlagent_config` e a senha/token são decifrados pelo Agent.
 - [ ] `GlideSecureRandomUtil` disponível no escopo do Hub (senão o token usa só GUIDs + SHA-256).
 - [ ] A página de hibernação real é classificada como transitória.

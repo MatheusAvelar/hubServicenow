@@ -10,6 +10,7 @@ import {
     DateTimeColumn,
     HtmlColumn,
     JsonColumn,
+    Password2Column,
 } from '@servicenow/sdk/core'
 import { userRole } from './roles.now'
 
@@ -139,4 +140,27 @@ export const x_1556735_dlagent_outbox = Table({
         activity: ReferenceColumn({ label: 'Atividade', referenceTable: 'x_1556735_dlagent_activity', readOnly: true }),
     },
     index: [{ name: 'dlagent_outbox_status_retry', unique: false, element: ['status', 'next_retry'] }],
+})
+
+/*
+ * Configuração do Agent nesta PDI (uma linha só, criada pelo AgentConfig na tela "Configurar Agent").
+ * Fica numa tabela do próprio escopo porque a sys_properties (global) não deixa app escopado criar registros.
+ * Dados de tabela não viajam no Update Set: atualizar o Agent não apaga a configuração do dev.
+ */
+export const x_1556735_dlagent_config = Table({
+    name: 'x_1556735_dlagent_config',
+    label: 'Configuração (Dev Lab)',
+    accessibleFrom: 'package_private',
+    allowWebServiceAccess: false,
+    createAccessControls: true,
+    userRole: userRole,
+    schema: {
+        hub_url: StringColumn({ label: 'URL do Hub', maxLength: 255 }),
+        hub_user: StringColumn({ label: 'Usuário de integração', maxLength: 100 }),
+        hub_password: Password2Column({ label: 'Senha de integração', maxLength: 255 }),
+        participant_token: Password2Column({ label: 'Token do participante', maxLength: 255 }),
+        last_sync: StringColumn({ label: 'Último contato com o Hub', maxLength: 40, readOnly: true }),
+        pull_since: StringColumn({ label: 'Atividades sincronizadas até', maxLength: 40, readOnly: true }),
+        score_cache: StringColumn({ label: 'Pontuação (cache do Hub)', maxLength: 1000, readOnly: true }),
+    },
 })

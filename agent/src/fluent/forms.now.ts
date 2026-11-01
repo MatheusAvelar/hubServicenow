@@ -116,6 +116,32 @@ export const outboxForm = Form({
     ],
 })
 
+export const configForm = Form({
+    table: 'x_1556735_dlagent_config',
+    view: default_view,
+    sections: [
+        {
+            caption: 'Configuração',
+            content: [
+                {
+                    layout: 'two-column',
+                    leftElements: [
+                        { field: 'hub_url', type: 'table_field' },
+                        { field: 'hub_user', type: 'table_field' },
+                        { field: 'hub_password', type: 'table_field' },
+                        { field: 'participant_token', type: 'table_field' },
+                    ],
+                    rightElements: [
+                        { field: 'last_sync', type: 'table_field' },
+                        { field: 'pull_since', type: 'table_field' },
+                        { field: 'score_cache', type: 'table_field' },
+                    ],
+                },
+            ],
+        },
+    ],
+})
+
 export const agentMenu = ApplicationMenu({
     $id: Now.ID['menu_agent'],
     title: 'Dev Lab',

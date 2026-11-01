@@ -112,13 +112,15 @@ devs inativos (last_seen), atividades com maior taxa de falha por check.
 | `activity` | cópia local da atividade (enunciado, setup, checks, versão) + state local |
 | `check_result` | resultado local de cada check por tentativa |
 | `outbox` | mensagens pendentes para o Hub: endpoint, payload, status, attempts, next_retry |
-| Propriedades | hub_url, hub_user, hub_password (password2), participant_token (password2), pull_interval, last_sync (data/hora do último contato com sucesso), score_cache (JSON: points, rank, completed, total — devolvido pelo Hub) |
+| `config` | uma linha por PDI: hub_url, hub_user, hub_password (password2), participant_token (password2), last_sync (data/hora do último contato com sucesso), pull_since, score_cache (JSON: points, rank, completed, total — devolvido pelo Hub) |
+| Propriedades | só valores padrão no Update Set: hub_url, hub_user, pull_interval |
 
-`hub_user`/`hub_password` são o usuário de integração compartilhado do Hub (Basic Auth). Se `gs.getProperty` não
-devolver o valor decifrado de uma password2 no escopo, o plano B é um Basic Auth Profile preenchido pelo dev.
-Também `pull_since` (server_time do último GET /activities). Só `hub_url`, `hub_user` e `pull_interval` vêm no
-Update Set; as demais são privadas (criadas pelo `AgentConfig` na tela "Configurar Agent" do portal), para que
-atualizar o Agent não apague a configuração do dev.
+`hub_user`/`hub_password` são o usuário de integração compartilhado do Hub (Basic Auth).
+**A configuração do dev nunca vai para `sys_properties`:** a tabela é global e recusa criação/gravação vinda do escopo
+do Agent ("Create operation against 'sys_properties' ... refused"), mesmo com cross-scope privilege. Por isso fica em
+`x_1556735_dlagent_config` (do próprio escopo), gravada pelo `AgentConfig` na tela "Configurar Agent". Dados de tabela
+não viajam no Update Set, então atualizar o Agent não apaga a configuração do dev. As propriedades `hub_url`/`hub_user`
+são só valores padrão.
 
 Campos extras das tabelas do Agent: `activity` também guarda checks (JSON), hub_state, approved_at, attempts, score,
 best_score (do Hub) e setup_log; `outbox` também guarda kind, method, last_status, last_error, response, dedupe_key e activity.

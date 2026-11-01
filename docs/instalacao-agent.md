@@ -19,7 +19,7 @@ O Agent pede só o mínimo para ler o que você constrói e criar os dados de ex
 | Ler | `sys_script`, `sys_script_include`, `sys_script_client` | Avaliar as suas Business Rules, Script Includes e Client Scripts |
 | Ler | `incident`, `problem`, `change_request`, `sc_req_item`, `sys_user`, `sys_user_group`, `sys_user_grmember` | Check `record_exists` (ex.: "existe incidente do VIP com prioridade 1") |
 | Criar | `sys_user`, `sys_user_group`, `incident` | Setup das atividades (ex.: usuário `lab.vip`), sempre depois do seu "Aprovar e instalar" |
-| Ler/gravar/criar | `sys_properties` | Somente as propriedades do próprio Agent (`x_1556735_dlagent.*`) |
+| Ler | `sys_properties` | Valores padrão do Agent (`x_1556735_dlagent.hub_url` e `hub_user`) |
 
 O Agent **nunca** cria nem altera metadados (Business Rules, tabelas, ACLs etc.): isso é o que você constrói.
 Também **não executa scripts vindos do Hub**: setup e checks são JSON interpretados por motores fixos.
@@ -40,8 +40,8 @@ Dê a role `x_1556735_dlagent.user` ao seu usuário (o admin já tem acesso).
    - **seu token** (64 caracteres, individual: não compartilhe).
 3. **Salvar configuração**. O Agent sincroniza em segundo plano; em alguns segundos as atividades aparecem.
 
-A senha e o token ficam em propriedades `password2` (cifradas) e não viajam em Update Sets. Atualizar o Agent não apaga
-a sua configuração.
+A configuração fica na tabela do Agent **Configuração (Dev Lab)**, com senha e token cifrados (`password2`). Dados de
+tabela não viajam em Update Sets: atualizar o Agent não apaga a sua configuração.
 
 ## 5. Fazendo uma atividade
 

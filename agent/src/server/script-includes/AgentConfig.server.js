@@ -1,36 +1,44 @@
 /**
- * AgentConfig — leitura/gravação das propriedades do Agent (x_1556735_dlagent.*).
+ * AgentConfig — configuração do Agent nesta PDI.
+ *
+ * Tudo que o dev informa (URL, usuário, senha, token) e o estado da sincronização ficam numa linha da tabela
+ * x_1556735_dlagent_config, do próprio escopo. Não usa sys_properties para gravar: a tabela é global e não
+ * deixa app escopado criar registros ("Create operation against 'sys_properties' ... has been refused").
+ * As propriedades x_1556735_dlagent.hub_url / hub_user (do Update Set) servem só de valor padrão.
  * Senha e token são password2: nunca vão para log nem para o navegador.
  */
 var AgentConfig = Class.create();
 
+AgentConfig.TABLE = 'x_1556735_dlagent_config';
 AgentConfig.PREFIX = 'x_1556735_dlagent.';
-AgentConfig.SECRET_PROPS = ['hub_password', 'participant_token'];
+AgentConfig.SECRET_FIELDS = ['hub_password', 'participant_token'];
+AgentConfig.FIELDS = ['hub_url', 'hub_user', 'hub_password', 'participant_token', 'last_sync', 'pull_since', 'score_cache'];
 
 AgentConfig.prototype = {
     initialize: function () {},
 
     hubUrl: function () {
-        return String(gs.getProperty(AgentConfig.PREFIX + 'hub_url', '')).trim().replace(/\/+$/, '');
+        var value = this._get('hub_url') || String(gs.getProperty(AgentConfig.PREFIX + 'hub_url', ''));
+        return value.trim().replace(/\/+$/, '');
     },
     hubUser: function () {
-        return String(gs.getProperty(AgentConfig.PREFIX + 'hub_user', '')).trim();
+        return (this._get('hub_user') || String(gs.getProperty(AgentConfig.PREFIX + 'hub_user', ''))).trim();
     },
     hubPassword: function () {
-        return this._secret('hub_password');
+        return this._get('hub_password');
     },
     token: function () {
-        return this._secret('participant_token');
+        return this._get('participant_token');
     },
     pullSince: function () {
-        return String(gs.getProperty(AgentConfig.PREFIX + 'pull_since', ''));
+        return this._get('pull_since');
     },
     lastSync: function () {
-        return String(gs.getProperty(AgentConfig.PREFIX + 'last_sync', ''));
+        return this._get('last_sync');
     },
     scoreCache: function () {
         try {
-            return JSON.parse(gs.getProperty(AgentConfig.PREFIX + 'score_cache', '') || 'null');
+            return JSON.parse(this._get('score_cache') || 'null');
         } catch (e) {
             return null;
         }
@@ -51,24 +59,14 @@ AgentConfig.prototype = {
         return out;
     },
 
-    /**
-     * Grava uma propriedade do Agent. As propriedades privadas (não vêm no Update Set) são criadas aqui
-     * na primeira vez. password2: o valor é cifrado pela plataforma ao gravar.
-     */
+    /** Grava um campo da configuração (cria a linha na primeira vez). password2 é cifrado pela plataforma. */
     set: function (name, value) {
-        var gr = new GlideRecord('sys_properties');
-        var text = value === null || value === undefined ? '' : String(value);
-        if (gr.get('name', AgentConfig.PREFIX + name)) {
-            gr.setValue('value', text);
-            gr.update();
-            return;
-        }
-        gr.initialize();
-        gr.setValue('name', AgentConfig.PREFIX + name);
-        gr.setValue('type', AgentConfig.SECRET_PROPS.indexOf(name) !== -1 ? 'password2' : 'string');
-        gr.setValue('description', 'Dev Lab Agent (criada automaticamente)');
-        gr.setValue('value', text);
-        gr.insert();
+        if (AgentConfig.FIELDS.indexOf(name) === -1) throw new Error('Campo de configuração desconhecido: ' + name);
+        var gr = this._record(true);
+        gr.setValue(name, value === null || value === undefined ? '' : String(value));
+        gr.setWorkflow(false);
+        gr.update();
+        this._cache = null;
     },
 
     /**
@@ -85,10 +83,14 @@ AgentConfig.prototype = {
         if (token && !/^[a-f0-9]{64}$/i.test(token)) {
             return { ok: false, message: 'O token deve ter 64 caracteres hexadecimais (copie exatamente o que o instrutor enviou).' };
         }
-        if (url) this.set('hub_url', url);
-        if (String(input.hub_user || '').trim()) this.set('hub_user', String(input.hub_user).trim());
-        if (input.hub_password) this.set('hub_password', String(input.hub_password));
-        if (token) this.set('participant_token', token.toLowerCase());
+        var gr = this._record(true);
+        if (url) gr.setValue('hub_url', url);
+        if (String(input.hub_user || '').trim()) gr.setValue('hub_user', String(input.hub_user).trim());
+        if (input.hub_password) gr.setValue('hub_password', String(input.hub_password));
+        if (token) gr.setValue('participant_token', token.toLowerCase());
+        gr.setWorkflow(false);
+        gr.update();
+        this._cache = null;
         var missing = this.missing();
         return missing.length
             ? { ok: true, message: 'Configuração salva. Ainda falta: ' + missing.join(', ') + '.' }
@@ -99,22 +101,47 @@ AgentConfig.prototype = {
         this.set('last_sync', new GlideDateTime().getValue());
     },
 
-    /**
-     * password2: gs.getProperty devolve o valor decifrado na maioria das releases. Se vier vazio/cifrado,
-     * tenta decifrar pelo registro (ver CLAUDE.md, plano B: Basic Auth Profile).
-     */
-    _secret: function (name) {
-        var value = gs.getProperty(AgentConfig.PREFIX + name, '');
-        if (value) return String(value);
-        try {
-            var gr = new GlideRecord('sys_properties');
-            if (gr.get('name', AgentConfig.PREFIX + name)) {
-                return String(gr.value.getDecryptedValue() || '');
+    // ------------------------------------------------------------------ apoio
+
+    /** A linha de configuração (a mais antiga, se por acaso houver mais de uma). */
+    _record: function (create) {
+        var gr = new GlideRecord(AgentConfig.TABLE);
+        gr.orderBy('sys_created_on');
+        gr.setLimit(1);
+        gr.query();
+        if (gr.next()) return gr;
+        if (!create) return null;
+        gr.initialize();
+        gr.setWorkflow(false);
+        var id = gr.insert();
+        gr = new GlideRecord(AgentConfig.TABLE);
+        gr.get(id);
+        this._cache = null;
+        return gr;
+    },
+
+    _get: function (name) {
+        if (!this._cache) {
+            var gr = this._record(false);
+            var cache = {};
+            for (var i = 0; i < AgentConfig.FIELDS.length; i++) {
+                var f = AgentConfig.FIELDS[i];
+                if (!gr) cache[f] = '';
+                else if (AgentConfig.SECRET_FIELDS.indexOf(f) !== -1) cache[f] = this._decrypt(gr, f);
+                else cache[f] = String(gr.getValue(f) || '');
             }
-        } catch (e) {
-            // sem acesso ao valor decifrado neste contexto
+            this._cache = cache;
         }
-        return '';
+        return this._cache[name] || '';
+    },
+
+    _decrypt: function (gr, field) {
+        try {
+            return String(gr[field].getDecryptedValue() || '');
+        } catch (e) {
+            gs.error('[Dev Lab] Não foi possível decifrar ' + field + ': ' + e.message);
+            return '';
+        }
     },
 
     type: 'AgentConfig',

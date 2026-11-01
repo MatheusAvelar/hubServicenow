@@ -16,6 +16,7 @@ declare global {
                     csp_create_sys_properties: {
                         table: 'sys_scope_privilege'
                         id: 'e59758c4819941ce9fa51b480c2f6d47'
+                        deleted: true
                     }
                     csp_create_sys_user: {
                         table: 'sys_scope_privilege'
@@ -72,6 +73,7 @@ declare global {
                     csp_write_sys_properties: {
                         table: 'sys_scope_privilege'
                         id: '46ad2cf05873479ea1b2696cd771b235'
+                        deleted: true
                     }
                     event_sync_now: {
                         table: 'sysevent_register'
@@ -359,6 +361,14 @@ declare global {
                             name: 'x_1556735_dlagent_check_result'
                             element: 'evidence'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '0f07cdce757b4e6e947d7e0005705f20'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'hub_url'
                         }
                     },
                     {
@@ -661,6 +671,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: '36447ccc240f4020b8063d7005b82aa1'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'hub_user'
+                            position: '2'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '36bdb2c1e0194d88812186a7e30431ad'
                         key: {
@@ -705,6 +737,28 @@ declare global {
                             name: 'x_1556735_dlagent_activity'
                             element: 'score'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '393b5f3cc4364190a35f4bd3c70163ca'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'hub_password'
+                            position: '3'
                         }
                     },
                     {
@@ -833,6 +887,24 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '41fff55e08f54ffc85f0ac968c8c6a3e'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'hub_password'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '4295a95d6efd41beab589e5c3aea8d7a'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'pull_since'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '4360729f523645a4a1105812488d72f5'
                         key: {
@@ -849,6 +921,22 @@ declare global {
                         key: {
                             name: 'x_1556735_dlagent_outbox'
                             element: 'NULL'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_db_object'
+                        id: '45761a51b0bf4d94a45bac0fa6924041'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '45a06aa509394992a6dce9731665a915'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'hub_user'
                             language: 'en'
                         }
                     },
@@ -1003,10 +1091,40 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: '5349dcf23e02429ebca8bf725162ddeb'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: '534e8dbc40a5412bb08799a8be001dc6'
                         key: {
                             name: 'x_1556735_dlagent_check_result'
                             element: 'max_points'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '54602a21ade847eeb80181fdd9219cc1'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.end_split'
+                            position: '9'
                         }
                     },
                     {
@@ -1051,6 +1169,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '5ca680a50fd140b4bd372e111c534c5e'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'hub_user'
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: '5d9b2af8a04e43a5b82df44b52f61022'
                         key: {
@@ -1092,6 +1218,37 @@ declare global {
                             }
                             element: 'max_attempts'
                             position: '13'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '5ec1550b224046c093a293470a10c9ac'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'hub_url'
+                            position: '1'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '5f522ebb96f4456eb227384c95ab8d4c'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'NULL'
+                            language: 'en'
                         }
                     },
                     {
@@ -1154,6 +1311,28 @@ declare global {
                         key: {
                             logical_table_name: 'x_1556735_dlagent_check_result'
                             col_name_string: 'activity,attempt'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '72352d5000d443eb961f7669162753bf'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'participant_token'
+                            position: '4'
                         }
                     },
                     {
@@ -1224,6 +1403,28 @@ declare global {
                         key: {
                             name: 'x_1556735_dlagent_activity'
                             element: 'checks'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '7589eabfcae649d1a3e27d10c20ebfd6'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'score_cache'
+                            position: '8'
                         }
                     },
                     {
@@ -1372,6 +1573,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: '851030681a1c41ae85797b003ccfb610'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'pull_since'
+                            position: '7'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '86971b3a41d9468e870528c78c0c03a6'
                         key: {
@@ -1464,6 +1687,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '8f6ddfbe972b4b77968bb33ac99241ae'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'hub_password'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '911dc2a0248f4d3899044ea3bb45762d'
                         key: {
@@ -1485,6 +1716,15 @@ declare global {
                         id: '93a2bcb8453d4505a16dfaae6a226039'
                         key: {
                             name: 'x_1556735_dlagent_check_result'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '94c7bfd69927466a9437c98b3687b79a'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'last_sync'
+                            language: 'en'
                         }
                     },
                     {
@@ -1537,6 +1777,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'ua_table_licensing_config'
+                        id: '99087954bd64465b9c4d297e5adefd88'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                        }
+                    },
+                    {
                         table: 'sys_ui_form_section'
                         id: '9ba03ca7290c4ef9875f520bcda25937'
                         key: {
@@ -1567,6 +1814,28 @@ declare global {
                                     sys_domain: 'global'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '9e61a613dcaa4c63891796746315fbcb'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'last_sync'
+                            position: '6'
                         }
                     },
                     {
@@ -1606,6 +1875,15 @@ declare global {
                         key: {
                             name: 'x_1556735_dlagent_activity'
                             element: 'completed_at'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'a354078a6212414988b9ead8cabb2c01'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'participant_token'
+                            language: 'en'
                         }
                     },
                     {
@@ -1762,6 +2040,15 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: 'ae9b084ec30a491a91ee608d0b792b17'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'score_cache'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: 'aec919f9594b4fc79b2e31c1efdc8ee7'
                         key: {
                             name: 'x_1556735_dlagent_activity'
@@ -1867,10 +2154,33 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: 'b683c6be1121419aa6d3f549c7872e21'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'participant_token'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: 'b7356be2158540f38332becb7694393b'
                         key: {
                             name: 'x_1556735_dlagent_check_result'
                             element: 'attempt'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_section'
+                        id: 'b8e18a0eade549b792d7081f062dbd47'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            caption: 'Configuração'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
                         }
                     },
                     {
@@ -1932,6 +2242,39 @@ declare global {
                             name: 'x_1556735_dlagent_outbox'
                             element: 'activity'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_form_section'
+                        id: 'bd277a00a740457597fc14679c6dac2a'
+                        key: {
+                            sys_ui_form: {
+                                id: 'e7f733ea63944366b2f9829efba0d8fb'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
                         }
                     },
                     {
@@ -2026,6 +2369,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: 'c6ce1d5fefb14a6580a6d8316f2c9fc9'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.begin_split'
+                            position: '0'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: 'c7e57d8baea6445bb2b6b834225f47d9'
                         key: {
@@ -2112,6 +2477,15 @@ declare global {
                                 }
                             }
                             sys_domain: 'global'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'd7c1224878ad46eb86bf5ee94d3dff67'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'hub_url'
+                            language: 'en'
                         }
                     },
                     {
@@ -2339,6 +2713,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: 'e2d4c22b2fc647c5af8bb8db97c47f7e'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'last_sync'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: 'e460219c53cb4cd59c848bc6ecceaeed'
                         key: {
@@ -2356,6 +2738,20 @@ declare global {
                             name: 'x_1556735_dlagent_check_result'
                             element: 'max_points'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_form'
+                        id: 'e7f733ea63944366b2f9829efba0d8fb'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
                         }
                     },
                     {
@@ -2508,6 +2904,36 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: 'ef4f1f07aa6e4bcfa04f7031d6d36dde'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'score_cache'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'f0772c8e6a594eed9bf237ec9ecb3afe'
+                        key: {
+                            sys_ui_section: {
+                                id: 'b8e18a0eade549b792d7081f062dbd47'
+                                key: {
+                                    name: 'x_1556735_dlagent_config'
+                                    caption: 'Configuração'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.split'
+                            position: '5'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: 'f31ce27b49af41b8a9f53e1f0f79681b'
                         key: {
                             name: 'x_1556735_dlagent_outbox'
@@ -2593,6 +3019,14 @@ declare global {
                         key: {
                             name: 'x_1556735_dlagent_outbox'
                             element: 'status'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: 'fb45922622484fe5a45a5ce50587b76d'
+                        key: {
+                            name: 'x_1556735_dlagent_config'
+                            element: 'pull_since'
                         }
                     },
                     {

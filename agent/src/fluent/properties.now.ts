@@ -5,9 +5,8 @@ import { userRole } from './roles.now'
 /*
  * Propriedades do Agent.
  * - Iguais para todos os devs (vêm no Update Set): hub_url, hub_user, pull_interval.
- * - Do dev / de estado (isPrivate: não viajam no Update Set, então uma atualização do Agent não apaga):
- *   hub_password, participant_token, last_sync, score_cache, pull_since.
- *   São criadas pelo AgentConfig (tela "Configurar Agent" do portal) na primeira vez.
+ * - São só valores padrão. O que o dev informa (URL, usuário, senha, token) e o estado da sincronização ficam na
+ *   tabela x_1556735_dlagent_config (AgentConfig): a sys_properties é global e não aceita criação vinda do escopo.
  * Nenhum segredo é versionado: hub_password e participant_token nunca têm valor aqui.
  */
 
