@@ -1,39 +1,46 @@
 # Dev Lab — laboratórios guiados de ServiceNow
 
 Exercícios de ServiceNow que os devs fazem na própria PDI, com validação automática e pontuação centralizada.
-**Tudo roda no ServiceNow**: este repositório só versiona o código-fonte dos dois apps (Fluent / ServiceNow SDK).
+**Tudo roda no ServiceNow.** A entrega é feita **só por Update Set XML** (`dist/`), importado manualmente na PDI.
+Nenhum script deste repositório fala com uma instância.
 
 | Pasta | O que é |
 |---|---|
-| `hub/` | App `x_1556735_dlhub`: na PDI do instrutor. Atividades, checks, participantes, API e portal `/devlab_hub` |
-| `agent/` | App `x_1556735_dlagent`: na PDI de cada dev. Pull, outbox, setup, motor de checks e portal `/devlab` |
-| `activities/` | Atividades em JSON (modelo/backup; a publicação é feita no Hub com "Importar JSON") |
+| `dist/` | Update Sets prontos para importar (ver [`docs/importar-updateset.md`](docs/importar-updateset.md)) |
+| `hub/` | Fonte do app `x_1556735_dlhub` (PDI do instrutor): atividades, checks, participantes, API, portal `/devlab_hub` |
+| `agent/` | Fonte do app `x_1556735_dlagent` (PDI de cada dev): pull, outbox, setup, motor de checks, portal `/devlab` |
+| `activities/` | Atividades em JSON (a publicação é feita no Hub com "Importar JSON") |
 | `schemas/` | `activity.schema.json` |
-| `scripts/` | Validação local das atividades e instruções do Update Set do Agent |
-| `tests/` | Testes locais das regras puras (validador, pontuação, outbox/backoff, motor) |
-| `docs/` | Contrato da API, instalação do Agent, roteiro do teste ponta a ponta |
+| `scripts/` | `build-updateset.js` (gera os Update Sets) e `validate-activity.js` |
+| `tests/` | Testes locais das regras puras e do gerador |
+| `docs/` | Importação, contrato da API, instalação do Agent, roteiro do teste ponta a ponta |
 
 Especificação completa: [`CLAUDE.md`](CLAUDE.md).
 
-## Comandos
+## Gerar os Update Sets
+
+```bash
+npm install --prefix hub && npm install --prefix agent
+```
+
+```bash
+npm run updateset:prova
+```
+
+```bash
+npm run updateset:hub
+```
+
+```bash
+npm run updateset:agent
+```
+
+Cada comando compila o app localmente (compilador Fluent do ServiceNow SDK, offline) e grava o XML em `dist/`.
+
+## Antes de commitar
 
 ```bash
 npm run check
 ```
 
-O `check` valida `activities/*.json`, roda os testes locais e os builds do Hub e do Agent. Outros comandos:
-
-```bash
-npm test
-```
-
-```bash
-cd hub && npm install && npm run build
-```
-
-```bash
-cd agent && npm install && npm run build
-```
-
-Deploy (`npm run deploy` em cada app) **só quando o instrutor pedir**, com credenciais configuradas via `now-sdk auth`
-ou variáveis de ambiente. Nunca commitar credenciais (`.env` está no `.gitignore`).
+Valida `activities/*.json`, roda os testes locais e compila os dois apps.

@@ -1,7 +1,7 @@
 {
     "name": "devlab",
     "private": true,
-    "description": "Dev Lab — laboratórios guiados ServiceNow (Hub + Agent). Node só para o SDK e validações locais.",
+    "description": "Dev Lab — laboratórios guiados ServiceNow (Hub + Agent). Node só para compilar localmente e gerar os Update Sets XML.",
     "license": "UNLICENSED",
     "engines": {
         "node": ">=20.18.0"
@@ -9,8 +9,11 @@
     "scripts": {
         "test": "node --test tests/*.test.js",
         "validate": "node scripts/validate-activity.js",
-        "hub:build": "npm --prefix hub run build",
-        "agent:build": "npm --prefix agent run build",
+        "hub:build": "npm --prefix hub run clean && npm --prefix hub run build",
+        "agent:build": "npm --prefix agent run clean && npm --prefix agent run build",
+        "updateset:prova": "npm run hub:build && node scripts/build-updateset.js hub --profile prova",
+        "updateset:hub": "npm run hub:build && node scripts/build-updateset.js hub",
+        "updateset:agent": "npm run agent:build && node scripts/build-updateset.js agent",
         "check": "npm run validate && npm test && npm run hub:build && npm run agent:build"
     }
 }

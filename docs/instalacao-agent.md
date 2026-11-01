@@ -7,7 +7,7 @@ quem fala com o Hub é sempre o Agent.
 ## 1. Importar o Update Set
 
 1. Na sua PDI: **System Update Sets → Retrieved Update Sets → Import Update Set from XML**.
-2. Escolha o arquivo `devlab-agent-<versão>.xml` que o instrutor enviou.
+2. Escolha o arquivo `DevLab_Agent_v1.xml` que o instrutor enviou (fica em `dist/` no repositório).
 3. Abra o update set importado → **Preview Update Set** → **Commit Update Set**.
 
 ## 2. Privilégios que você aceita (cross-scope)

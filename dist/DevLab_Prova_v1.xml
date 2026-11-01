@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2026-11-01 17:09:42">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<application_name>Dev Lab Hub</application_name>
+<application_scope>x_1556735_dlhub</application_scope>
+<application_version>1.0.0</application_version>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Prova do formato: app x_1556735_dlhub, roles, tabela Trilha (com form), Script Include ScoringRules e menu com o módulo Trilhas.</description>
+<inserted/>
+<name>Dev Lab — pacote de prova</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>a68f8542521677c7e1fc54514718f8c2</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:42</sys_created_on>
+<sys_id>a68f8542521677c7e1fc54514718f8c2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:42</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_8bd9e7f37659440da3da2416581f8c5f</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app">
+  <sys_app action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>8bd9e7f37659440da3da2416581f8c5f</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_app_8bd9e7f37659440da3da2416581f8c5f</sys_update_name>
+    <active>true</active>
+    <can_edit_in_studio>true</can_edit_in_studio>
+    <enforce_license>log</enforce_license>
+    <guided_setup_guid/>
+    <hide_on_ui>false</hide_on_ui>
+    <ide_created/>
+    <installed_as_dependency>false</installed_as_dependency>
+    <js_level>es_latest</js_level>
+    <licensable>true</licensable>
+    <license_category>none</license_category>
+    <license_model>none</license_model>
+    <logo/>
+    <menu/>
+    <name>Dev Lab Hub</name>
+    <package_json/>
+    <package_resolver_version>1.0.0</package_resolver_version>
+    <private>false</private>
+    <restrict_table_access>false</restrict_table_access>
+    <runtime_access_tracking>permissive</runtime_access_tracking>
+    <scope>x_1556735_dlhub</scope>
+    <scoped_administration>false</scoped_administration>
+    <short_description/>
+    <source>x_1556735_dlhub</source>
+    <subscription_entitlement/>
+    <sys_code/>
+    <trackable>true</trackable>
+    <uninstall_blocked>false</uninstall_blocked>
+    <user_role/>
+    <version>1.0.0</version>
+  </sys_app>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:42</sys_created_on>
+<sys_id>b30956cb2a2354489d8d8c636cd099c5</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0120000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:42</sys_updated_on>
+<table/>
+<target_name>Dev Lab Hub</target_name>
+<type>Custom Application</type>
+<update_domain>global</update_domain>
+<update_guid>ba4143602fd3d7f3a4a2065db0509c4e</update_guid>
+<update_guid_history>ba4143602fd3d7f3a4a2065db0509c4e:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_user_role_03ed2df861804bc3897eb22ab89818e1</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+  <sys_user_role action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>03ed2df861804bc3897eb22ab89818e1</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_user_role_03ed2df861804bc3897eb22ab89818e1</sys_update_name>
+    <assignable_by/>
+    <can_delegate>true</can_delegate>
+    <description>Dev Lab Hub — instrutor: cadastra trilhas, atividades, checks e participantes; vê o painel.</description>
+    <elevated_privilege>false</elevated_privilege>
+    <grantable>true</grantable>
+    <name>x_1556735_dlhub.admin</name>
+    <scoped_admin>false</scoped_admin>
+    <suffix>admin</suffix>
+    <sys_name>x_1556735_dlhub.admin</sys_name>
+  </sys_user_role>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:43</sys_created_on>
+<sys_id>65a7e6d77fc119244aa8d8a6fd4be088</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0130000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:43</sys_updated_on>
+<table/>
+<target_name>x_1556735_dlhub.admin</target_name>
+<type>Role</type>
+<update_domain>global</update_domain>
+<update_guid>ade9fe0d116a4bb9e87fd8ef5a315b1a</update_guid>
+<update_guid_history>ade9fe0d116a4bb9e87fd8ef5a315b1a:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_user_role_5f2c1b35a7ac4c2596a0d709550b4279</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+  <sys_user_role action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>5f2c1b35a7ac4c2596a0d709550b4279</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_user_role_5f2c1b35a7ac4c2596a0d709550b4279</sys_update_name>
+    <assignable_by/>
+    <can_delegate>true</can_delegate>
+    <description>Dev Lab Hub — usuário de integração dos Agents: acesso somente à API /devlab/v1.</description>
+    <elevated_privilege>false</elevated_privilege>
+    <grantable>true</grantable>
+    <name>x_1556735_dlhub.agent</name>
+    <scoped_admin>false</scoped_admin>
+    <suffix>agent</suffix>
+    <sys_name>x_1556735_dlhub.agent</sys_name>
+  </sys_user_role>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:44</sys_created_on>
+<sys_id>ce8f64a258602e11c5840371600305d6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0140000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:44</sys_updated_on>
+<table/>
+<target_name>x_1556735_dlhub.agent</target_name>
+<type>Role</type>
+<update_domain>global</update_domain>
+<update_guid>7c12abdb257f5243ed6c1cb521cb5e6e</update_guid>
+<update_guid_history>7c12abdb257f5243ed6c1cb521cb5e6e:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_db_object_e5a1051c7c1c45b9824c06270f5a21c9</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object">
+  <sys_db_object action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>e5a1051c7c1c45b9824c06270f5a21c9</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_db_object_e5a1051c7c1c45b9824c06270f5a21c9</sys_update_name>
+    <access>package_private</access>
+    <caller_access/>
+    <create_access_controls>true</create_access_controls>
+    <is_extendable>false</is_extendable>
+    <label>Trilha</label>
+    <live_feed_enabled>false</live_feed_enabled>
+    <name>x_1556735_dlhub_track</name>
+    <number_ref/>
+    <scriptable_table>false</scriptable_table>
+    <super_class/>
+    <user_role name="x_1556735_dlhub.admin">03ed2df861804bc3897eb22ab89818e1</user_role>
+    <ws_access>false</ws_access>
+  </sys_db_object>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:45</sys_created_on>
+<sys_id>458d4033f85ec3d11f011d4bde9f7373</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0150000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:45</sys_updated_on>
+<table/>
+<target_name>Trilha</target_name>
+<type>Table</type>
+<update_domain>global</update_domain>
+<update_guid>3b62a2c14b4fe387f30ecc00977a7732</update_guid>
+<update_guid_history>3b62a2c14b4fe387f30ecc00977a7732:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_1556735_dlhub_track_null</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="INSERT_OR_UPDATE" element="" table="x_1556735_dlhub_track" apply_defaults="true">
+    <sys_id>6e63086961ca4edfa0ebb118f9bcf8a6</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_dictionary_x_1556735_dlhub_track_null</sys_update_name>
+    <active>true</active>
+    <attributes/>
+    <audit>false</audit>
+    <create_roles/>
+    <delete_roles/>
+    <element/>
+    <internal_type>collection</internal_type>
+    <name>x_1556735_dlhub_track</name>
+    <read_only>false</read_only>
+    <read_roles/>
+    <sizeclass/>
+    <text_index>false</text_index>
+    <write_roles/>
+  </sys_dictionary>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:46</sys_created_on>
+<sys_id>9eaed24f6aa0edd681a3ab506d6d2181</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0160000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:46</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>fcf9d8002317416ffdd474a62d7dccb1</update_guid>
+<update_guid_history>fcf9d8002317416ffdd474a62d7dccb1:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_1556735_dlhub_track_active</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="INSERT_OR_UPDATE" element="active" table="x_1556735_dlhub_track" apply_defaults="true">
+    <sys_id>510cde37d4c24e739145707b8747384d</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_dictionary_x_1556735_dlhub_track_active</sys_update_name>
+    <active>true</active>
+    <array>false</array>
+    <attributes/>
+    <audit>false</audit>
+    <calculation/>
+    <choice/>
+    <choice_field/>
+    <choice_table/>
+    <column_label>Ativa</column_label>
+    <create_roles/>
+    <default_value>true</default_value>
+    <delete_roles/>
+    <dependent/>
+    <dependent_on_field/>
+    <display>false</display>
+    <dynamic_creation/>
+    <dynamic_creation_script/>
+    <dynamic_ref_qual/>
+    <element>active</element>
+    <element_reference>false</element_reference>
+    <formula/>
+    <function_definition/>
+    <function_field>false</function_field>
+    <internal_type>boolean</internal_type>
+    <mandatory>false</mandatory>
+    <max_length/>
+    <name>x_1556735_dlhub_track</name>
+    <primary>false</primary>
+    <read_only>false</read_only>
+    <read_only_option/>
+    <read_roles/>
+    <reference/>
+    <reference_cascade_rule/>
+    <reference_floats/>
+    <reference_key/>
+    <reference_qual/>
+    <reference_qual_condition/>
+    <spell_check>false</spell_check>
+    <table_reference>false</table_reference>
+    <text_index>false</text_index>
+    <unique>false</unique>
+    <use_dependent_field>false</use_dependent_field>
+    <use_reference_qualifier>simple</use_reference_qualifier>
+    <virtual/>
+    <virtual_type>script</virtual_type>
+    <widget/>
+    <write_roles/>
+    <xml_view>false</xml_view>
+  </sys_dictionary>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:47</sys_created_on>
+<sys_id>90210f29e0b27ff20388682147d300fd</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0170000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:47</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.active</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>7f4b9d2f6d1b76133fed2ece477ae1e6</update_guid>
+<update_guid_history>7f4b9d2f6d1b76133fed2ece477ae1e6:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_1556735_dlhub_track_description</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="INSERT_OR_UPDATE" element="description" table="x_1556735_dlhub_track" apply_defaults="true">
+    <sys_id>20f2fd1e45334d079698ae32a7bd0261</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_dictionary_x_1556735_dlhub_track_description</sys_update_name>
+    <active>true</active>
+    <array>false</array>
+    <attributes/>
+    <audit>false</audit>
+    <calculation/>
+    <choice/>
+    <choice_field/>
+    <choice_table/>
+    <column_label>Descrição</column_label>
+    <create_roles/>
+    <default_value/>
+    <delete_roles/>
+    <dependent/>
+    <dependent_on_field/>
+    <display>false</display>
+    <dynamic_creation/>
+    <dynamic_creation_script/>
+    <dynamic_ref_qual/>
+    <element>description</element>
+    <element_reference>false</element_reference>
+    <formula/>
+    <function_definition/>
+    <function_field>false</function_field>
+    <internal_type>multi_two_lines</internal_type>
+    <mandatory>false</mandatory>
+    <max_length>4000</max_length>
+    <name>x_1556735_dlhub_track</name>
+    <primary>false</primary>
+    <read_only>false</read_only>
+    <read_only_option/>
+    <read_roles/>
+    <reference/>
+    <reference_cascade_rule/>
+    <reference_floats/>
+    <reference_key/>
+    <reference_qual/>
+    <reference_qual_condition/>
+    <spell_check>false</spell_check>
+    <table_reference>false</table_reference>
+    <text_index>false</text_index>
+    <unique>false</unique>
+    <use_dependent_field>false</use_dependent_field>
+    <use_reference_qualifier>simple</use_reference_qualifier>
+    <virtual/>
+    <virtual_type>script</virtual_type>
+    <widget/>
+    <write_roles/>
+    <xml_view>false</xml_view>
+  </sys_dictionary>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:48</sys_created_on>
+<sys_id>606800f5225072aae83d9a8c3c43a51d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0180000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:48</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.description</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>b548b768f2cb045d8f6e85287501ffb8</update_guid>
+<update_guid_history>b548b768f2cb045d8f6e85287501ffb8:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_1556735_dlhub_track_name</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="INSERT_OR_UPDATE" element="name" table="x_1556735_dlhub_track" apply_defaults="true">
+    <sys_id>e958a637fb4b49b0b04010afb14d3264</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_dictionary_x_1556735_dlhub_track_name</sys_update_name>
+    <active>true</active>
+    <array>false</array>
+    <attributes/>
+    <audit>false</audit>
+    <calculation/>
+    <choice/>
+    <choice_field/>
+    <choice_table/>
+    <column_label>Nome</column_label>
+    <create_roles/>
+    <default_value/>
+    <delete_roles/>
+    <dependent/>
+    <dependent_on_field/>
+    <display>true</display>
+    <dynamic_creation/>
+    <dynamic_creation_script/>
+    <dynamic_ref_qual/>
+    <element>name</element>
+    <element_reference>false</element_reference>
+    <formula/>
+    <function_definition/>
+    <function_field>false</function_field>
+    <internal_type>string</internal_type>
+    <mandatory>true</mandatory>
+    <max_length>100</max_length>
+    <name>x_1556735_dlhub_track</name>
+    <primary>false</primary>
+    <read_only>false</read_only>
+    <read_only_option/>
+    <read_roles/>
+    <reference/>
+    <reference_cascade_rule/>
+    <reference_floats/>
+    <reference_key/>
+    <reference_qual/>
+    <reference_qual_condition/>
+    <spell_check>false</spell_check>
+    <table_reference>false</table_reference>
+    <text_index>false</text_index>
+    <unique>false</unique>
+    <use_dependent_field>false</use_dependent_field>
+    <use_reference_qualifier>simple</use_reference_qualifier>
+    <virtual/>
+    <virtual_type>script</virtual_type>
+    <widget/>
+    <write_roles/>
+    <xml_view>false</xml_view>
+  </sys_dictionary>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:49</sys_created_on>
+<sys_id>5232ce617fd1ac3d2bfa9114c76277f0</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0190000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:49</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.name</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>ab7d21e907f4ecbc8c6e50892382cd22</update_guid>
+<update_guid_history>ab7d21e907f4ecbc8c6e50892382cd22:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_1556735_dlhub_track_order</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="INSERT_OR_UPDATE" element="order" table="x_1556735_dlhub_track" apply_defaults="true">
+    <sys_id>0d3d3f1e0de7436cb7bc3a306a0760e0</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_dictionary_x_1556735_dlhub_track_order</sys_update_name>
+    <active>true</active>
+    <array>false</array>
+    <attributes/>
+    <audit>false</audit>
+    <calculation/>
+    <choice/>
+    <choice_field/>
+    <choice_table/>
+    <column_label>Ordem</column_label>
+    <create_roles/>
+    <default_value>100</default_value>
+    <delete_roles/>
+    <dependent/>
+    <dependent_on_field/>
+    <display>false</display>
+    <dynamic_creation/>
+    <dynamic_creation_script/>
+    <dynamic_ref_qual/>
+    <element>order</element>
+    <element_reference>false</element_reference>
+    <formula/>
+    <function_definition/>
+    <function_field>false</function_field>
+    <internal_type>integer</internal_type>
+    <mandatory>false</mandatory>
+    <max_length/>
+    <name>x_1556735_dlhub_track</name>
+    <primary>false</primary>
+    <read_only>false</read_only>
+    <read_only_option/>
+    <read_roles/>
+    <reference/>
+    <reference_cascade_rule/>
+    <reference_floats/>
+    <reference_key/>
+    <reference_qual/>
+    <reference_qual_condition/>
+    <spell_check>false</spell_check>
+    <table_reference>false</table_reference>
+    <text_index>false</text_index>
+    <unique>false</unique>
+    <use_dependent_field>false</use_dependent_field>
+    <use_reference_qualifier>simple</use_reference_qualifier>
+    <virtual/>
+    <virtual_type>script</virtual_type>
+    <widget/>
+    <write_roles/>
+    <xml_view>false</xml_view>
+  </sys_dictionary>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:50</sys_created_on>
+<sys_id>4912d1333cd2eeb487c1246139daeb03</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a01a0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:50</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.order</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>4d48189d51aebbfabd3f450792bfded8</update_guid>
+<update_guid_history>4d48189d51aebbfabd3f450792bfded8:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_1556735_dlhub_track__en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_documentation">
+  <sys_documentation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>3dcb46d26df048d8ba624fc50e9cacfa</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_documentation_x_1556735_dlhub_track__en</sys_update_name>
+    <element/>
+    <help/>
+    <hint/>
+    <label>Trilha</label>
+    <language>en</language>
+    <name>x_1556735_dlhub_track</name>
+    <plural>Trilhas</plural>
+    <url/>
+    <url_target/>
+  </sys_documentation>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:51</sys_created_on>
+<sys_id>f222228ed6afd3aa63410c1515d9c124</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a01b0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:51</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>34d8eeb75b8403942d487aac4dc3c1f8</update_guid>
+<update_guid_history>34d8eeb75b8403942d487aac4dc3c1f8:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_1556735_dlhub_track_active_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_documentation">
+  <sys_documentation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>92ae03f851b84ca1a0b9411fccb2af34</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_documentation_x_1556735_dlhub_track_active_en</sys_update_name>
+    <element>active</element>
+    <help/>
+    <hint/>
+    <label>Ativa</label>
+    <language>en</language>
+    <name>x_1556735_dlhub_track</name>
+    <plural>Ativas</plural>
+    <url/>
+    <url_target/>
+  </sys_documentation>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:52</sys_created_on>
+<sys_id>e5edd963c507c43b54f2b0fb3228b33d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a01c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:52</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.active</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>4014ab11c93fc932934c5cf7a4399efa</update_guid>
+<update_guid_history>4014ab11c93fc932934c5cf7a4399efa:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_1556735_dlhub_track_description_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_documentation">
+  <sys_documentation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>df7b7fbfdc384648910bffac7241bf77</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_documentation_x_1556735_dlhub_track_description_en</sys_update_name>
+    <element>description</element>
+    <help/>
+    <hint/>
+    <label>Descrição</label>
+    <language>en</language>
+    <name>x_1556735_dlhub_track</name>
+    <plural>Descriçãos</plural>
+    <url/>
+    <url_target/>
+  </sys_documentation>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:53</sys_created_on>
+<sys_id>fe61fa43cd8ae0fc81355074802d8a33</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a01d0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:53</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.description</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>3f91b50dbf92fcb1ba82830f19e41dec</update_guid>
+<update_guid_history>3f91b50dbf92fcb1ba82830f19e41dec:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_1556735_dlhub_track_name_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_documentation">
+  <sys_documentation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>308dca4c3dd54dad81632f86c4de9d97</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_documentation_x_1556735_dlhub_track_name_en</sys_update_name>
+    <element>name</element>
+    <help/>
+    <hint/>
+    <label>Nome</label>
+    <language>en</language>
+    <name>x_1556735_dlhub_track</name>
+    <plural>Nomes</plural>
+    <url/>
+    <url_target/>
+  </sys_documentation>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:54</sys_created_on>
+<sys_id>a90d8197c21dba8d6d4c9a633bda8beb</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a01e0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:54</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.name</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>c8f0cf8f4742fb8852dfa9cecaddcc5f</update_guid>
+<update_guid_history>c8f0cf8f4742fb8852dfa9cecaddcc5f:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_1556735_dlhub_track_order_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_documentation">
+  <sys_documentation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>5bd73a77404845fb8b76035ba99a6e50</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_documentation_x_1556735_dlhub_track_order_en</sys_update_name>
+    <element>order</element>
+    <help/>
+    <hint/>
+    <label>Ordem</label>
+    <language>en</language>
+    <name>x_1556735_dlhub_track</name>
+    <plural>Ordems</plural>
+    <url/>
+    <url_target/>
+  </sys_documentation>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:55</sys_created_on>
+<sys_id>b065a36f85a90830b9fd7353b896f78b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a01f0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:55</sys_updated_on>
+<table>x_1556735_dlhub_track</table>
+<target_name>x_1556735_dlhub_track.order</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>1ea10aff7e410710b79a4c6c48fa4c67</update_guid>
+<update_guid_history>1ea10aff7e410710b79a4c6c48fa4c67:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_f7b82beafbc64cd9850638da99ebb356</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+  <sys_script_include action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>f7b82beafbc64cd9850638da99ebb356</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_script_include_f7b82beafbc64cd9850638da99ebb356</sys_update_name>
+    <access>package_private</access>
+    <active>true</active>
+    <api_name>x_1556735_dlhub.ScoringRules</api_name>
+    <caller_access/>
+    <client_callable>false</client_callable>
+    <description>Regras puras de pontuação e ranking.</description>
+    <mobile_callable>false</mobile_callable>
+    <name>ScoringRules</name>
+    <sandbox_callable>false</sandbox_callable>
+    <script><![CDATA[/**
+ * ScoringRules — regras puras (sem Glide) de pontuação e ranking.
+ *
+ * O Hub NUNCA confia em pontos enviados pelo Agent: só no passed de cada check.
+ * Os pontos são recalculados aqui a partir da definição dos checks guardada no Hub.
+ */
+var ScoringRules = Class.create();
+
+ScoringRules.prototype = {
+    initialize: function () {},
+
+    /**
+     * Pontua uma tentativa.
+     * @param {Array<{code:string, points:number, required:boolean}>} checks definição no Hub
+     * @param {Array<{check_id:string, passed:boolean}>} submitted resultado enviado pelo Agent
+     * @param {number} hintCost total já descontado por dicas na matrícula
+     * @returns {{score:number, max:number, completed:boolean, checks:Array, unknown:string[]}}
+     */
+    scoreAttempt: function (checks, submitted, hintCost) {
+        var byId = {};
+        var unknown = [];
+        var list = Array.isArray(submitted) ? submitted : [];
+        for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            if (!item || typeof item.check_id !== 'string') continue;
+            byId[item.check_id] = item.passed === true;
+        }
+        var known = {};
+        var out = [];
+        var score = 0;
+        var max = 0;
+        var requiredOk = true;
+        for (var j = 0; j < checks.length; j++) {
+            var def = checks[j];
+            known[def.code] = true;
+            var points = Math.max(0, parseInt(def.points, 10) || 0);
+            var passed = byId[def.code] === true;
+            max += points;
+            if (passed) score += points;
+            if (def.required !== false && !passed) requiredOk = false;
+            out.push({ check_id: def.code, passed: passed, points: passed ? points : 0, max: points, sent: def.code in byId });
+        }
+        for (var id in byId) {
+            if (!known[id]) unknown.push(id);
+        }
+        var cost = Math.max(0, parseInt(hintCost, 10) || 0);
+        return {
+            score: Math.max(0, score - cost),
+            max: max,
+            completed: checks.length > 0 && requiredOk,
+            checks: out,
+            unknown: unknown,
+        };
+    },
+
+    /**
+     * Valida o número da tentativa enviado pelo Agent.
+     * @returns {string|null} mensagem de erro, ou null se estiver ok
+     */
+    checkAttempt: function (attempt, maxAttempts) {
+        if (typeof attempt !== 'number' || Math.floor(attempt) !== attempt || attempt < 1) {
+            return 'O número da tentativa deve ser um inteiro maior ou igual a 1.';
+        }
+        var max = parseInt(maxAttempts, 10) || 0;
+        if (max > 0 && attempt > max) {
+            return 'Limite de ' + max + ' tentativas atingido.';
+        }
+        return null;
+    },
+
+    /**
+     * Monta o ranking. Desempate: mais concluídas, depois quem pontuou primeiro (last_scored_at mais antigo).
+     * @param {Array<{participant:string, name:string, points:number, completed:number, last_scored_at?:string, last_seen?:string}>} rows
+     * @returns {Array} as mesmas linhas, ordenadas, com `position` (empates na mesma posição)
+     */
+    rank: function (rows) {
+        var sorted = rows.slice().sort(function (a, b) {
+            if (b.points !== a.points) return b.points - a.points;
+            if (b.completed !== a.completed) return b.completed - a.completed;
+            var ta = a.last_scored_at || '9999';
+            var tb = b.last_scored_at || '9999';
+            if (ta !== tb) return ta < tb ? -1 : 1;
+            return (a.name || '').localeCompare(b.name || '');
+        });
+        var position = 0;
+        var prev = null;
+        for (var i = 0; i < sorted.length; i++) {
+            var r = sorted[i];
+            if (!prev || prev.points !== r.points || prev.completed !== r.completed) position = i + 1;
+            r.position = position;
+            prev = r;
+        }
+        return sorted;
+    },
+
+    /** Iniciais para o avatar ("Ana Souza" → "AS"). */
+    initials: function (name) {
+        var parts = String(name || '').trim().split(/\s+/).filter(function (p) { return p; });
+        if (parts.length === 0) return '?';
+        var first = parts[0].charAt(0);
+        var last = parts.length > 1 ? parts[parts.length - 1].charAt(0) : '';
+        return (first + last).toUpperCase();
+    },
+
+    /**
+     * Texto relativo em português ("há 12 min", "há 3 dias").
+     * @param {number} diffMs agora - momento, em milissegundos
+     */
+    relativeTime: function (diffMs) {
+        if (typeof diffMs !== 'number' || !isFinite(diffMs)) return 'nunca';
+        var min = Math.floor(Math.max(0, diffMs) / 60000);
+        if (min < 1) return 'agora';
+        if (min < 60) return 'há ' + min + ' min';
+        var h = Math.floor(min / 60);
+        if (h < 24) return 'há ' + h + ' h';
+        var d = Math.floor(h / 24);
+        return d === 1 ? 'há 1 dia' : 'há ' + d + ' dias';
+    },
+
+    type: 'ScoringRules',
+};
+]]]]><![CDATA[></script>
+    <sys_name>ScoringRules</sys_name>
+  </sys_script_include>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:56</sys_created_on>
+<sys_id>809aae2beb92db1713ba0693b817d3b2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0200000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:56</sys_updated_on>
+<table/>
+<target_name>ScoringRules</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>62eef90e25ef41b1a4f9c9b27f8b9d6b</update_guid>
+<update_guid_history>62eef90e25ef41b1a4f9c9b27f8b9d6b:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_section_797bc70b272240168e717696ac3eb918</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update>
+  <sys_ui_section caption="Trilha" section_id="797bc70b272240168e717696ac3eb918" sys_domain="global" table="x_1556735_dlhub_track" view="">
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>.begin_split</element>
+      <position>0</position>
+      <sys_id>2ea676894c664267921f7d309f6bb249</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type>.begin_split</type>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>name</element>
+      <position>1</position>
+      <sys_id>8744d2d0ea1c483b98accd195bb1ce56</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>.split</element>
+      <position>2</position>
+      <sys_id>a9b42c5ed1b14b769dcaf8577ff4df8c</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type>.split</type>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>order</element>
+      <position>3</position>
+      <sys_id>208ca3ab0cbc4defbaff831c1261537f</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>active</element>
+      <position>4</position>
+      <sys_id>3ec562523cf54f8a88bc28ae3f19dd49</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>.end_split</element>
+      <position>5</position>
+      <sys_id>25f47f58e75a494294751295b18169c7</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type>.end_split</type>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>description</element>
+      <position>6</position>
+      <sys_id>f8e94bf4e3ae46069e1302f5f57eefc1</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_section action="INSERT_OR_UPDATE" apply_defaults="true">
+      <caption>Trilha</caption>
+      <header>false</header>
+      <name>x_1556735_dlhub_track</name>
+      <roles/>
+      <sys_domain>global</sys_domain>
+      <sys_id>797bc70b272240168e717696ac3eb918</sys_id>
+      <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+      <sys_user/>
+      <title>false</title>
+      <view_name/>
+      <view name="NULL" display_value="Default view">Default view</view>
+    </sys_ui_section>
+  </sys_ui_section>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:57</sys_created_on>
+<sys_id>cd67cac22e30a14eee0e0380aa9f08fe</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0210000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:57</sys_updated_on>
+<table/>
+<target_name>Trilha</target_name>
+<type>Form Sections</type>
+<update_domain>global</update_domain>
+<update_guid>cf394b0b4eac2fd9dcee99f20fb43003</update_guid>
+<update_guid_history>cf394b0b4eac2fd9dcee99f20fb43003:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_form_sections_1dea2996be344d05ac39e7d1bde0a924</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update>
+  <sys_ui_form_sections form_id="1dea2996be344d05ac39e7d1bde0a924" sys_domain="global" table="x_1556735_dlhub_track">
+    <sys_ui_form_section action="INSERT_OR_UPDATE" apply_defaults="true">
+      <position>0</position>
+      <sys_id>53faff78e8574372a2e11e0bacb667fc</sys_id>
+      <sys_ui_form display_value="x_1556735_dlhub_track" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">1dea2996be344d05ac39e7d1bde0a924</sys_ui_form>
+      <sys_ui_section caption="Trilha" display_value="Trilha" name="x_1556735_dlhub_track" sys_domain="global" view="Default view">797bc70b272240168e717696ac3eb918</sys_ui_section>
+    </sys_ui_form_section>
+    <sys_ui_form action="INSERT_OR_UPDATE" apply_defaults="true">
+      <name>x_1556735_dlhub_track</name>
+      <roles/>
+      <sys_id>1dea2996be344d05ac39e7d1bde0a924</sys_id>
+      <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+      <sys_user/>
+      <view name="NULL" display_value="Default view">Default view</view>
+      <view_name/>
+    </sys_ui_form>
+  </sys_ui_form_sections>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:58</sys_created_on>
+<sys_id>748e0c825696bf7ef90e590594a52e43</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0220000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:58</sys_updated_on>
+<table/>
+<target_name>x_1556735_dlhub_track</target_name>
+<type>Form Sections</type>
+<update_domain>global</update_domain>
+<update_guid>7fe08cf163e931569d9470de4aebf914</update_guid>
+<update_guid_history>7fe08cf163e931569d9470de4aebf914:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_application_c2f3a4971c2147ba878016e27b1756fe</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app_application">
+  <sys_app_application action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>c2f3a4971c2147ba878016e27b1756fe</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_app_application_c2f3a4971c2147ba878016e27b1756fe</sys_update_name>
+    <active>true</active>
+    <category/>
+    <description/>
+    <device_type>browser</device_type>
+    <hint>Laboratórios guiados de ServiceNow</hint>
+    <name/>
+    <order>100</order>
+    <roles>x_1556735_dlhub.admin</roles>
+    <title>Dev Lab Hub</title>
+  </sys_app_application>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:09:59</sys_created_on>
+<sys_id>d96775f019d8a4f2ff535c1739e66b1c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0230000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:09:59</sys_updated_on>
+<table/>
+<target_name>Dev Lab Hub</target_name>
+<type>Application Menu</type>
+<update_domain>global</update_domain>
+<update_guid>10b3f4a9467a9dd802181f1cf6e60892</update_guid>
+<update_guid_history>10b3f4a9467a9dd802181f1cf6e60892:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Dev Lab Hub">8bd9e7f37659440da3da2416581f8c5f</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_229f330f74b346868f38f5ca33efbf0a</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app_module">
+  <sys_app_module action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>229f330f74b346868f38f5ca33efbf0a</sys_id>
+    <sys_scope display_value="x_1556735_dlhub">8bd9e7f37659440da3da2416581f8c5f</sys_scope>
+    <sys_update_name>sys_app_module_229f330f74b346868f38f5ca33efbf0a</sys_update_name>
+    <active>true</active>
+    <application>c2f3a4971c2147ba878016e27b1756fe</application>
+    <link_type>LIST</link_type>
+    <name>x_1556735_dlhub_track</name>
+    <order>300</order>
+    <roles>x_1556735_dlhub.admin</roles>
+    <title>Trilhas</title>
+  </sys_app_module>
+</record_update>]]></payload>
+<payload_hash/>
+<remote_update_set display_value="Dev Lab — pacote de prova">a68f8542521677c7e1fc54514718f8c2</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-11-01 17:10:00</sys_created_on>
+<sys_id>c78cba0fa873bca33a5ef6f9c54b074e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a19816a0240000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-11-01 17:10:00</sys_updated_on>
+<table/>
+<target_name>x_1556735_dlhub_track</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>f7ddc355f028f1396a9719ecb5854374</update_guid>
+<update_guid_history>f7ddc355f028f1396a9719ecb5854374:0</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>

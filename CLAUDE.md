@@ -11,7 +11,7 @@ própria PDI, com validação automática e pontuação centralizada.
   servem de modelo/backup; a publicação acontece DENTRO do Hub (form da atividade ou importação de JSON).
 
 **Tudo roda 100% no ServiceNow.** Nenhum servidor, banco ou serviço externo. O código local existe só para
-versionar e fazer o deploy dos dois apps via SDK.
+versionar e gerar os **Update Sets XML** dos dois apps, que o Matheus importa manualmente na PDI.
 
 ## Princípios inegociáveis
 
@@ -26,15 +26,22 @@ versionar e fazer o deploy dos dois apps via SDK.
 
 ## Stack e ferramentas
 
-- ServiceNow SDK (`@servicenow/sdk`, linguagem Fluent) para os dois apps.
-  **Antes de começar, confirme a versão do SDK compatível com a release da PDI e os comandos exatos com
-  `npx @servicenow/sdk --help`** (auth, build, install mudam entre versões). Não presuma sintaxe de memória;
-  consulte a documentação oficial do SDK/Fluent.
-- Node.js só para o SDK e para validar localmente os JSON de exemplo (`scripts/validate-activity.js`).
+- **Entrega 100% por Update Set XML**, importado manualmente na PDI:
+  System Update Sets → Retrieved Update Sets → Import Update Set from XML → Preview → Commit.
+  **Não usar `now-sdk auth`, `now-sdk install`/`deploy` nem credenciais de instância** — nada fala com a PDI.
+- Fonte dos apps em Fluent (`@servicenow/sdk` 4.14.0). O SDK é usado **só como compilador local, offline**
+  (`now-sdk build`): transforma `src/` em um XML `<record_update>` por registro em `<app>/dist/app/`.
+- `scripts/build-updateset.js` embrulha esses registros em `sys_update_xml` dentro de um `<unload>` com o
+  `sys_remote_update_set` e grava em `dist/` (versionado):
+  - `npm run updateset:prova` → `dist/DevLab_Prova_v1.xml` (pacote mínimo de prova, subconjunto do Hub com os mesmos sys_ids);
+  - `npm run updateset:hub` → `dist/DevLab_Hub_v1.xml`;
+  - `npm run updateset:agent` → `dist/DevLab_Agent_v1.xml`.
+  Ordem de aplicação: app, roles, tabelas (coleção `_null` antes dos campos), choices, labels, scripts, REST, UI, portal, menu.
+  Não entram no update set: `dictionary/` (bootstrap de instalação de app) e `sys_module` (metadados do pacote do SDK).
+- Node.js só para compilar, gerar os Update Sets e validar localmente (`scripts/validate-activity.js`, `npm test`).
   A validação de verdade acontece no Hub, no Script Include `ActivityImportService`.
-- Distribuição do Agent aos devs: Update Set XML exportado + repositório Git (Source Control).
-- Credenciais da PDI do Hub: usuário de integração dedicado, via `now-sdk auth` / variáveis de ambiente.
-  **Nunca** commitar credenciais; `.env` no `.gitignore`.
+- Distribuição do Agent aos devs: `dist/DevLab_Agent_v1.xml` + repositório Git.
+- **Nunca** commitar credenciais; `.env` no `.gitignore`.
 
 ## Estrutura do repositório
 
@@ -47,7 +54,8 @@ hubServicenow/         # repositório (github.com/MatheusAvelar/hubServicenow)
   agent/               # app Fluent - Dev Lab Agent
   activities/          # LAB0001.json, LAB0002.json ...
   schemas/activity.schema.json
-  scripts/             # validate-activity.js, export-agent-updateset.md
+  scripts/             # build-updateset.js, validate-activity.js
+  dist/                # Update Sets XML gerados (DevLab_Prova_v1.xml, DevLab_Hub_v1.xml, DevLab_Agent_v1.xml)
   docs/                # guia de instalação do Agent para os devs, contrato da API
 ```
 
@@ -56,8 +64,10 @@ hubServicenow/         # repositório (github.com/MatheusAvelar/hubServicenow)
 - Prefixo de escopo: usar o vendor prefix da PDI (`x_<prefixo>_`). Hub: `x_<prefixo>_dlhub`; Agent: `x_<prefixo>_dlagent`.
   PDI do Hub: `dev400642.service-now.com`, vendor prefix `1556735` → **`x_1556735_dlhub`** e **`x_1556735_dlagent`**.
   Limites do SDK: escopo ≤ 18 caracteres; nome de tabela ≤ 30 caracteres; toda tabela nova precisa de form padrão.
-- SDK: `@servicenow/sdk` 4.14.0 (Fluent), Node ≥ 20.18. Comandos: `npm run build`, `npm run deploy` (= `now-sdk install`),
-  `now-sdk pack` (gera o Update Set do Agent). Documentação local: `npx now-sdk explain <tópico>`.
+- SDK: `@servicenow/sdk` 4.14.0 (Fluent), Node ≥ 20.18, só `build`/`clean` locais. Documentação local:
+  `npx now-sdk explain <tópico>`. (`now-sdk pack` gera pacote de app, não Update Set — não usar.)
+- Em `Record({...})` genérico, roles vão como texto (`roles: ['x_1556735_dlhub.admin']`): objeto `Role` vira
+  `[object Object]` no XML.
 - Código, nomes de campos e comentários em inglês; labels, mensagens e textos de UI em português.
 - Toda lógica de servidor em Script Includes testáveis; Business Rules/REST/UI Actions só orquestram.
 - Versionar: cada atividade tem `version`; o Agent informa `agent_version` em toda chamada.
@@ -306,6 +316,8 @@ Página **Minhas Atividades**:
 
 ## Como trabalhar neste repositório
 
-- Implementar fase a fase; ao fim de cada fase, deploy na PDI do Hub e teste ponta a ponta com uma PDI de dev de teste.
+- Implementar fase a fase; ao fim de cada fase, gerar os Update Sets em `dist/`, o Matheus importa na PDI do Hub e
+  na PDI de dev de teste, e faz o teste ponta a ponta (`docs/teste-ponta-a-ponta.md`).
+- Antes de concluir: `npm run check` (valida atividades, testes locais, builds dos dois apps).
 - Antes de criar tabela/campo novo, atualizar este arquivo (modelo de dados) e o contrato da API.
 - Nunca alterar a semântica de um tipo de check existente; criar um tipo novo ou versionar.

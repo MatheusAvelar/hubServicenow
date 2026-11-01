@@ -1,23 +1,19 @@
 # Teste ponta a ponta — Fase 1
 
 Hub: `dev400642.service-now.com` (PDI do instrutor). Dev de teste: uma segunda PDI.
-**Nenhum deploy é feito sem o instrutor pedir.**
+Tudo é instalado por **Update Set XML** (`dist/`), importado manualmente — ver `docs/importar-updateset.md`.
 
-## 0. Pré-checagens (antes do primeiro deploy)
+## 0. Pré-checagens (antes do primeiro import)
 
-Com `now-sdk auth` configurado para o Hub (credenciais fora do repositório):
+Na PDI do Hub, confirme que estão livres (listas vazias):
+- `sp_portal.list` com filtro *URL suffix = devlab_hub*;
+- `sys_scope.list` com filtro *Scope starts with x_1556735_* (exceto se o pacote de prova já foi importado).
 
-```bash
-npx now-sdk query sp_portal -q 'url_suffix=devlab_hub' -f 'sys_id' -o json
-npx now-sdk query sp_page -q 'idSTARTSWITHx_1556735_' -f 'sys_id,id' -o json
-npx now-sdk query sys_scope -q 'scope=x_1556735_dlhub^ORscope=x_1556735_dlagent' -f 'sys_id,scope' -o json
-```
-
-Todas devem voltar vazias. Na PDI de teste, repetir para `url_suffix=devlab`.
+Na PDI de teste, `sp_portal.list` com *URL suffix = devlab*. O Preview do update set também acusa colisões.
 
 ## 1. Hub
 
-1. `cd hub && npm run build && npm run deploy`.
+1. Importar `dist/DevLab_Hub_v1.xml` → Preview sem problemas → Commit.
 2. Criar o usuário de integração (ex.: `devlab.agent`), marcar **Web service access only**, dar a role
    `x_1556735_dlhub.agent` e definir a senha.
 3. Dar `x_1556735_dlhub.admin` ao instrutor.
@@ -27,7 +23,7 @@ Todas devem voltar vazias. Na PDI de teste, repetir para `url_suffix=devlab`.
 
 ## 2. Agent na PDI de teste
 
-1. `cd agent && npm run build && npm run deploy` (com `auth` apontando para a PDI de teste), ou importar o Update Set.
+1. Importar `dist/DevLab_Agent_v1.xml` → Preview sem problemas → Commit.
 2. Conferir em **Application Cross-Scope Access** que os privilégios estão **Allowed**.
 3. Abrir `/devlab` → **Configurar Agent** (usuário/senha de integração + token) → salvar.
 4. Em segundos: header "Hub sincronizado agora · nenhum envio na fila", LAB0001 e LAB0002 como **Nova**.

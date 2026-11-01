@@ -127,15 +127,15 @@ export const agentMenu = ApplicationMenu({
 Record({
     $id: Now.ID['mod_portal'],
     table: 'sys_app_module',
-    data: { title: 'Minhas Atividades', application: agentMenu, link_type: 'DIRECT', query: '/devlab', window_name: '_blank', order: 100, roles: [userRole], active: true },
+    data: { title: 'Minhas Atividades', application: agentMenu, link_type: 'DIRECT', query: '/devlab', window_name: '_blank', order: 100, roles: ['x_1556735_dlagent.user'], active: true },
 })
 Record({
     $id: Now.ID['mod_outbox'],
     table: 'sys_app_module',
-    data: { title: 'Outbox', application: agentMenu, link_type: 'LIST', name: 'x_1556735_dlagent_outbox', order: 200, roles: [userRole], active: true },
+    data: { title: 'Outbox', application: agentMenu, link_type: 'LIST', name: 'x_1556735_dlagent_outbox', order: 200, roles: ['x_1556735_dlagent.user'], active: true },
 })
 Record({
     $id: Now.ID['mod_activities'],
     table: 'sys_app_module',
-    data: { title: 'Atividades (diagnóstico)', application: agentMenu, link_type: 'LIST', name: 'x_1556735_dlagent_activity', order: 300, roles: [userRole], active: true },
+    data: { title: 'Atividades (diagnóstico)', application: agentMenu, link_type: 'LIST', name: 'x_1556735_dlagent_activity', order: 300, roles: ['x_1556735_dlagent.user'], active: true },
 })

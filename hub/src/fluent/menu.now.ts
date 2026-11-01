@@ -22,7 +22,7 @@ Record({
         query: '/devlab_hub?id=x_1556735_dlhub_painel',
         window_name: '_blank',
         order: 100,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
@@ -36,7 +36,7 @@ Record({
         link_type: 'LIST',
         name: 'x_1556735_dlhub_activity',
         order: 200,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
@@ -50,7 +50,7 @@ Record({
         link_type: 'DIRECT',
         query: 'x_1556735_dlhub_import.do',
         order: 250,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
@@ -64,7 +64,7 @@ Record({
         link_type: 'LIST',
         name: 'x_1556735_dlhub_track',
         order: 300,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
@@ -78,7 +78,7 @@ Record({
         link_type: 'LIST',
         name: 'x_1556735_dlhub_participant',
         order: 400,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
@@ -92,7 +92,7 @@ Record({
         link_type: 'LIST',
         name: 'x_1556735_dlhub_enrollment',
         order: 500,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
@@ -106,7 +106,7 @@ Record({
         link_type: 'LIST',
         name: 'x_1556735_dlhub_api_log',
         order: 600,
-        roles: [adminRole],
+        roles: ['x_1556735_dlhub.admin'],
         active: true,
     },
 })
