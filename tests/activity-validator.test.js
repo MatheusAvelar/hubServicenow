@@ -141,3 +141,12 @@ test('esqueleto de código do enunciado não reprova os próprios checks script_
         }
     }
 });
+
+test('enunciado não cita "Ver dica" enquanto o Agent não tiver o botão de dica', () => {
+    const agent = fs.readFileSync(path.join(__dirname, '..', 'agent/src/portal/widgets/home/template.html'), 'utf8');
+    if (/Ver dica/.test(agent)) return;
+    for (const f of fs.readdirSync(path.join(__dirname, '..', 'activities')).filter((n) => n.endsWith('.json'))) {
+        const a = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'activities', f), 'utf8'));
+        assert.doesNotMatch(a.description, /Ver dica/, `${f} cita um botão que não existe`);
+    }
+});
