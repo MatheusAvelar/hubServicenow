@@ -119,7 +119,8 @@ body {
 .dl-badge-warn { color: var(--dl-warn); background: var(--dl-warn-bg); }
 
 /* Status de check */
-.dl-status { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; font-weight: 700; }
+.dl-status { box-sizing: border-box; position: relative; display: inline-flex; flex: none; align-items: center; justify-content: center; width: 28px; height: 28px;
+    border-radius: 6px; font-weight: 700; overflow: hidden; line-height: 1; }
 .dl-status-pass { background: var(--dl-accent); color: #FFFFFF; }
 .dl-status-fail { background: var(--dl-fail-bg); color: var(--dl-fail); border: 1px solid var(--dl-fail); }
 .dl-status-none { background: var(--dl-pending-bg); color: var(--dl-text-2); border: 1px dashed var(--dl-pending-border); }
@@ -141,4 +142,5 @@ body {
 .dl-alert-error { background: var(--dl-fail-bg); color: var(--dl-fail); }
 .dl-alert-info { background: var(--dl-accent-soft); color: var(--dl-accent-hover); }
 
-.sr-only-dl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only-dl { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important;
+    overflow: hidden !important; clip: rect(0 0 0 0) !important; clip-path: inset(50%) !important; white-space: nowrap !important; border: 0 !important; }

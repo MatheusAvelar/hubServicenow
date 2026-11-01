@@ -90,4 +90,6 @@
 .dl-criteria-name { font-weight: 600; }
 .dl-criteria-msg { font-size: 14px; color: var(--dl-text-2); margin-top: 2px; overflow-wrap: anywhere; }
 .dl-criteria-pts { white-space: nowrap; }
+/* Garante o texto do status só para leitor de tela mesmo se o tema não carregar. */
+.dl-criteria .sr-only-dl { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; padding: 0; }
 .dl-detail-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
