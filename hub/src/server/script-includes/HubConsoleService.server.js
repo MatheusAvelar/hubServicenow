@@ -24,6 +24,7 @@ HubConsoleService.ACTIONS = {
     activities: 'activities',
     activity_json: 'activityJson',
     activity_raw: 'activityRaw',
+    api_log: 'apiLog',
     validate: 'validate',
     import: 'importActivity',
     publish: 'publish',
@@ -149,6 +150,26 @@ HubConsoleService.prototype = {
             checks.push({ code: c.getValue('code'), params: c.getValue('params'), params_display: c.getDisplayValue('params'), params_type: typeof c.getValue('params') });
         }
         return { ok: true, setup: a.getValue('setup'), setup_display: a.getDisplayValue('setup'), checks: checks };
+    },
+
+    /** Últimas chamadas da API do Dev Lab (diagnóstico de sincronização). */
+    apiLog: function (params) {
+        var limit = Math.min(Math.max(parseInt(params.limit, 10) || 20, 1), 100);
+        var list = [];
+        var l = new GlideRecord('x_1556735_dlhub_api_log');
+        l.orderByDesc('sys_created_on');
+        l.setLimit(limit);
+        l.query();
+        while (l.next()) {
+            list.push({
+                created: l.getDisplayValue('sys_created_on'),
+                participant: l.participant.getDisplayValue() || '',
+                endpoint: l.getValue('endpoint'),
+                status: parseInt(l.getValue('status'), 10) || 0,
+                summary: l.getValue('payload_summary') || '',
+            });
+        }
+        return { ok: true, entries: list };
     },
 
     /** Valida sem gravar e descreve o que a importação vai fazer. */
