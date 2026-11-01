@@ -137,7 +137,7 @@
                     <ul>
                         <li ng-repeat="s in data.detail.setup_log track by $index" ng-class="{'dl-setup-fail': !s.ok}">
                             <span aria-hidden="true">{{s.ok ? '✓' : '✕'}}</span>
-                            <span class="sr-only-dl">{{s.ok ? 'OK' : 'Falhou'}}:</span> {{s.message}}
+                            <span>{{s.ok ? 'OK' : 'Falhou'}}:</span> {{s.message}}
                         </li>
                     </ul>
                 </div>
@@ -146,10 +146,7 @@
                 <ul class="dl-criteria">
                     <li ng-repeat="k in data.detail.criteria track by k.id">
                         <span ng-if="data.detail.state !== 'new'" class="dl-status" ng-class="'dl-status-' + k.status"
-                            title="{{c.statusLabel(k.status)}}">
-                            <span aria-hidden="true">{{c.statusIcon(k.status)}}</span>
-                            <span class="sr-only-dl">{{c.statusLabel(k.status)}}</span>
-                        </span>
+                            role="img" aria-label="{{c.statusLabel(k.status)}}" title="{{c.statusLabel(k.status)}}">{{c.statusIcon(k.status)}}</span>
                         <div class="dl-criteria-body">
                             <div class="dl-criteria-name"><span class="dl-mono">{{k.id}}</span> · {{k.name}}</div>
                             <div class="dl-criteria-msg" ng-if="k.message">{{k.message}}</div>

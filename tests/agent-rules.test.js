@@ -177,3 +177,8 @@ test('API do Dev Lab não usa setBody (que embrulha em result)', () => {
     const src = fs.readFileSync(path.join(__dirname, '..', 'hub/src/server/script-includes/DevLabApi.server.js'), 'utf8');
     assert.doesNotMatch(src, /response\.setBody\(/);
 });
+
+test('portal do Agent não depende de classe CSS para esconder texto (o portal da PDI ignorou sr-only)', () => {
+    const tpl = fs.readFileSync(path.join(__dirname, '..', 'agent/src/portal/widgets/home/template.html'), 'utf8');
+    assert.doesNotMatch(tpl, /sr-only/);
+});
