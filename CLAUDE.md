@@ -39,8 +39,10 @@ versionar e fazer o deploy dos dois apps via SDK.
 ## Estrutura do repositório
 
 ```
-devlab/
+hubServicenow/         # repositório (github.com/MatheusAvelar/hubServicenow)
   CLAUDE.md
+  package.json         # npm run check = validate + test + build dos dois apps
+  tests/               # testes locais (node:test) dos Script Includes puros
   hub/                 # app Fluent - Dev Lab Hub
   agent/               # app Fluent - Dev Lab Agent
   activities/          # LAB0001.json, LAB0002.json ...
@@ -86,6 +88,21 @@ devs inativos (last_seen), atividades com maior taxa de falha por check.
 
 `hub_user`/`hub_password` são o usuário de integração compartilhado do Hub (Basic Auth). Se `gs.getProperty` não
 devolver o valor decifrado de uma password2 no escopo, o plano B é um Basic Auth Profile preenchido pelo dev.
+Também `pull_since` (server_time do último GET /activities). Só `hub_url`, `hub_user` e `pull_interval` vêm no
+Update Set; as demais são privadas (criadas pelo `AgentConfig` na tela "Configurar Agent" do portal), para que
+atualizar o Agent não apague a configuração do dev.
+
+Campos extras das tabelas do Agent: `activity` também guarda checks (JSON), hub_state, approved_at, attempts, score,
+best_score (do Hub) e setup_log; `outbox` também guarda kind, method, last_status, last_error, response, dedupe_key e activity.
+
+Allowlists fixas no build (iguais no Hub e no Agent; teste em `tests/agent-rules.test.js`):
+- setup `create_record`: `sys_user`, `sys_user_group`, `incident`;
+- `record_exists`: `incident`, `problem`, `change_request`, `sc_req_item`, `sys_user`, `sys_user_group`, `sys_user_grmember`;
+- `script_*`: `sys_script`, `sys_script_include`, `sys_script_client`.
+Nova tabela = nova versão do Agent (novo cross-scope privilege) + atualizar o `ActivityValidator` do Hub.
+
+Pull e ping são leituras periódicas (se o Hub dorme, o próximo job tenta de novo). Toda escrita no Hub
+(approve, results) passa pelo outbox.
 
 Jobs: pull de atividades (30 min), flush do outbox (15 min, backoff exponencial até 12h).
 "Sincronizar agora" é assíncrono: o widget só dispara o evento `x_1556735_dlagent.sync_now`; uma Script Action

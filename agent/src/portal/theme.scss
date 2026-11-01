@@ -1,0 +1,144 @@
+/*
+ * Dev Lab — tema compartilhado do portal do Agent (/devlab) — mesmas variáveis do Hub.
+ * Identidade visual definida no CLAUDE.md (seção Interface). Cores só por variáveis CSS.
+ * Fontes: IBM Plex Sans / IBM Plex Mono quando instaladas; senão system-ui / monospace
+ * (nada é carregado de fora do ServiceNow).
+ */
+:root {
+    --dl-bg: #F4F6F4;
+    --dl-card: #FFFFFF;
+    --dl-border: #E1E6E3;
+    --dl-radius: 12px;
+    --dl-text: #16201C;
+    --dl-text-2: #56625D;
+    --dl-accent: #1F6F5C;
+    --dl-accent-hover: #164F42;
+    --dl-accent-soft: #E3F1EC;
+    --dl-header: #16201C;
+    --dl-fail-bg: #F6D9D5;
+    --dl-fail: #A12A1F;
+    --dl-pending-bg: #EEF1EF;
+    --dl-pending-border: #A5AFAA;
+    --dl-warn: #9A3A0B;
+    --dl-warn-bg: #FDEEDD;
+    --dl-new: #1E3A8A;
+    --dl-new-bg: #E0E8FB;
+    --dl-progress: #8A3A08;
+    --dl-progress-bg: #FDEEDD;
+    --dl-done: #164F42;
+    --dl-done-bg: #E3F1EC;
+    --dl-font: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --dl-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+body {
+    background: var(--dl-bg);
+    color: var(--dl-text);
+    font-family: var(--dl-font);
+    font-size: 16px;
+}
+
+.dl-page { padding: 24px 0 48px; }
+
+.dl-mono { font-family: var(--dl-mono); font-variant-numeric: tabular-nums; }
+.dl-muted { color: var(--dl-text-2); }
+
+.dl-card {
+    background: var(--dl-card);
+    border: 1px solid var(--dl-border);
+    border-radius: var(--dl-radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+.dl-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.dl-card-sub { font-size: 14px; color: var(--dl-text-2); margin-top: 4px; }
+
+/* Tabelas largas rolam dentro do card */
+.dl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.dl-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.dl-table th {
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dl-text-2);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--dl-border);
+    white-space: nowrap;
+}
+.dl-table td { padding: 12px; border-bottom: 1px solid var(--dl-border); vertical-align: middle; }
+.dl-table tr:last-child td { border-bottom: 0; }
+
+/* Botões: mínimo 44px de altura */
+.dl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 8px;
+    border: 1px solid var(--dl-accent);
+    background: var(--dl-accent);
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.dl-btn:hover, .dl-btn:focus { background: var(--dl-accent-hover); border-color: var(--dl-accent-hover); color: #FFFFFF; text-decoration: none; }
+.dl-btn-secondary { background: var(--dl-card); color: var(--dl-accent); }
+.dl-btn-secondary:hover, .dl-btn-secondary:focus { background: var(--dl-accent-soft); color: var(--dl-accent-hover); }
+.dl-btn[disabled] { opacity: .6; cursor: not-allowed; }
+.dl-btn svg { width: 18px; height: 18px; }
+
+/* Selos de estado: sempre com texto/ícone, nunca só cor */
+.dl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+}
+.dl-badge svg { width: 12px; height: 12px; }
+.dl-badge-new { color: var(--dl-new); background: var(--dl-new-bg); }
+.dl-badge-progress { color: var(--dl-progress); background: var(--dl-progress-bg); }
+.dl-badge-done { color: var(--dl-done); background: var(--dl-done-bg); }
+.dl-badge-warn { color: var(--dl-warn); background: var(--dl-warn-bg); }
+
+/* Status de check */
+.dl-status { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; font-weight: 700; }
+.dl-status-pass { background: var(--dl-accent); color: #FFFFFF; }
+.dl-status-fail { background: var(--dl-fail-bg); color: var(--dl-fail); border: 1px solid var(--dl-fail); }
+.dl-status-none { background: var(--dl-pending-bg); color: var(--dl-text-2); border: 1px dashed var(--dl-pending-border); }
+
+/* Barra de progresso */
+.dl-bar { height: 8px; background: var(--dl-pending-bg); border-radius: 999px; overflow: hidden; min-width: 80px; }
+.dl-bar > span { display: block; height: 100%; background: var(--dl-accent); border-radius: 999px; }
+
+/* Avatar de iniciais */
+.dl-avatar {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--dl-accent-soft); color: var(--dl-accent-hover);
+    font-weight: 700; font-size: 14px; flex: 0 0 auto;
+}
+
+.dl-empty { color: var(--dl-text-2); padding: 16px 0; }
+.dl-alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; }
+.dl-alert-error { background: var(--dl-fail-bg); color: var(--dl-fail); }
+.dl-alert-info { background: var(--dl-accent-soft); color: var(--dl-accent-hover); }
+
+.sr-only-dl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

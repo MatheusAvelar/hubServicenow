@@ -83,7 +83,7 @@
       "additionalProperties": false,
       "required": ["table", "query"],
       "properties": {
-        "table": { "$ref": "#/$defs/tableName" },
+        "table": { "enum": ["incident", "problem", "change_request", "sc_req_item", "sys_user", "sys_user_group", "sys_user_grmember"], "description": "Tabelas que o Agent pode ler (cross-scope privileges)." },
         "query": { "type": "string", "minLength": 1, "maxLength": 4000, "description": "Encoded query. O motor também exige sys_created_on posterior à aprovação." }
       }
     },

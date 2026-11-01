@@ -99,6 +99,9 @@ test('params por tipo', () => {
     a.checks[1].params = { source_table: 'sys_dictionary', filter: '', text: '' };
     a.checks[2].params = { table: 'incident' };
     const r = validate(a);
+    const b = base();
+    b.checks[2].params = { table: 'sys_script', query: 'active=true' };
+    assert.ok(hasError(validate(b), 'tabelas que o Agent pode ler'));
     assert.ok(hasError(r, 'params.table deve ser um nome de tabela'));
     assert.ok(hasError(r, 'params.when'));
     assert.ok(hasError(r, 'params.active'));

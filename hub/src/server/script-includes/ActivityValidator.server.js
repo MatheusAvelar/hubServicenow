@@ -12,6 +12,14 @@ var ActivityValidator = Class.create();
 /** Tabelas onde o setup pode criar registros. Precisa bater com os cross-scope privileges do Agent. */
 ActivityValidator.SETUP_TABLE_ALLOWLIST = ['sys_user', 'sys_user_group', 'incident'];
 
+/**
+ * Tabelas que o check record_exists pode consultar. Precisa bater com os cross-scope privileges
+ * de leitura do Agent (que são declarados no build e não podem vir do Hub).
+ */
+ActivityValidator.RECORD_TABLE_ALLOWLIST = [
+    'incident', 'problem', 'change_request', 'sc_req_item', 'sys_user', 'sys_user_group', 'sys_user_grmember',
+];
+
 /** Ações de setup conhecidas pelo SetupEngine do Agent. */
 ActivityValidator.SETUP_ACTIONS = ['create_record'];
 
@@ -218,7 +226,10 @@ ActivityValidator.prototype = {
         }
         if (type === 'record_exists') {
             this._unknownKeys(params, ['table', 'query'], where + ' params', errors);
-            this._tableName(params.table, where + ': params.table', errors);
+            if (ActivityValidator.RECORD_TABLE_ALLOWLIST.indexOf(params.table) === -1) {
+                errors.push(where + ': params.table "' + params.table + '" não está entre as tabelas que o Agent pode ler (' +
+                    ActivityValidator.RECORD_TABLE_ALLOWLIST.join(', ') + ').');
+            }
             this._requiredText(params.query, where + ': params.query', 4000, errors);
         } else if (type === 'business_rule') {
             this._unknownKeys(params, ['table', 'when', 'active', 'action', 'name_contains'], where + ' params', errors);
