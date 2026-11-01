@@ -1,0 +1,43 @@
+{
+  "number": "LAB0002",
+  "version": 1,
+  "track": "Business Rules",
+  "title": "Grupo de atribuição por categoria",
+  "level": "junior",
+  "description": "<p>Incidentes de <strong>rede</strong> estão caindo sem grupo e ficam parados na fila.</p><p>Crie uma <strong>Business Rule <em>before insert</em></strong> na tabela <code>incident</code> que, quando a <strong>Categoria</strong> for <code>network</code> e o <strong>Grupo de atribuição</strong> estiver vazio, preencha o grupo <code>Lab Rede</code>.</p><ul><li>O setup já criou o grupo <code>Lab Rede</code>.</li><li>Não use <code>gs.log()</code> (não existe em apps escopados); se precisar registrar algo, use <code>gs.info()</code>.</li><li>Evite fixar o sys_id do grupo no script: busque o grupo pelo nome.</li><li>Para testar, crie um incidente de categoria Network sem grupo.</li></ul>",
+  "due_date": "2026-11-22",
+  "max_attempts": 5,
+  "setup": [
+    {
+      "action": "create_record",
+      "table": "sys_user_group",
+      "key": ["name"],
+      "values": { "name": "Lab Rede", "description": "Grupo criado pelo Dev Lab (LAB0002)", "active": true }
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "name": "BR before insert na tabela incident",
+      "type": "business_rule",
+      "params": { "table": "incident", "when": "before", "action": ["insert"], "active": true },
+      "points": 30
+    },
+    {
+      "id": "c2",
+      "name": "Script sem gs.log()",
+      "type": "script_not_contains",
+      "params": { "source_table": "sys_script", "filter": "collection=incident^active=true", "text": "gs.log(" },
+      "points": 20
+    },
+    {
+      "id": "c3",
+      "name": "Incidente de rede atribuído ao Lab Rede",
+      "type": "record_exists",
+      "params": { "table": "incident", "query": "category=network^assignment_group.name=Lab Rede" },
+      "points": 50,
+      "hint": "A condição da BR precisa olhar a categoria e se o grupo ainda está vazio (assignment_group.nil()).",
+      "hint_cost": 10
+    }
+  ]
+}

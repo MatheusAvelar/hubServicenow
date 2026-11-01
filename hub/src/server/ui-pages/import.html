@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <style>
+        .dl-import { max-width: 960px; margin: 24px auto; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #16201C; }
+        .dl-import h1 { font-size: 22px; margin: 0 0 8px; }
+        .dl-import p { color: #56625D; margin: 0 0 16px; }
+        .dl-import textarea { width: 100%; min-height: 420px; font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+            border: 1px solid #E1E6E3; border-radius: 12px; padding: 12px; box-sizing: border-box; }
+        .dl-import .dl-actions { margin-top: 12px; display: flex; gap: 8px; }
+        .dl-import button { min-height: 44px; padding: 0 20px; border-radius: 8px; border: 1px solid #1F6F5C; font-size: 15px; cursor: pointer; }
+        .dl-import .dl-primary { background: #1F6F5C; color: #FFFFFF; }
+        .dl-import .dl-primary:hover { background: #164F42; }
+        .dl-import .dl-secondary { background: #FFFFFF; color: #1F6F5C; }
+    </style>
+    <div class="dl-import">
+        <h1>Importar atividade (JSON)</h1>
+        <p>Cole o conteúdo de um arquivo <code>activities/LAB0001.json</code>. Se a atividade já existir, ela é atualizada
+            e a versão é incrementada. A atividade importada fica em rascunho: revise e use <strong>Publicar</strong>.</p>
+        <g:ui_form>
+            <label for="activity_json" class="sr-only">JSON da atividade</label>
+            <textarea id="activity_json" name="activity_json" spellcheck="false" placeholder='{ "number": "LAB0001", "version": 1, ... }'></textarea>
+            <div class="dl-actions">
+                <button type="submit" class="dl-primary">Validar e importar</button>
+                <button type="button" class="dl-secondary" onclick="window.location='x_1556735_dlhub_activity_list.do'">Cancelar</button>
+            </div>
+        </g:ui_form>
+    </div>
+</j:jelly>

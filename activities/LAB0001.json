@@ -1,0 +1,43 @@
+{
+  "number": "LAB0001",
+  "version": 1,
+  "track": "Business Rules",
+  "title": "Prioridade automática em incidentes VIP",
+  "level": "junior",
+  "description": "<p>Quando um <strong>usuário VIP</strong> abre um incidente, ele precisa ser tratado com prioridade máxima.</p><p>Crie uma <strong>Business Rule <em>before</em></strong> na tabela <code>incident</code>, para <em>insert</em> e <em>update</em>, que defina <strong>Impacto = 1</strong> e <strong>Urgência = 1</strong> (o que resulta em Prioridade 1) sempre que o <em>caller</em> for VIP.</p><ul><li>Use <code>current</code> para alterar os campos; em BR <em>before</em> não chame <code>current.update()</code>.</li><li>O setup já criou o usuário <code>lab.vip</code> (VIP).</li><li>Para testar, crie um incidente com o caller <code>lab.vip</code> depois de ativar a sua BR.</li></ul>",
+  "due_date": "2026-11-15",
+  "max_attempts": 5,
+  "setup": [
+    {
+      "action": "create_record",
+      "table": "sys_user",
+      "key": ["user_name"],
+      "values": { "user_name": "lab.vip", "first_name": "Lab", "last_name": "VIP", "vip": true, "active": true }
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "name": "BR before criada na tabela incident",
+      "type": "business_rule",
+      "params": { "table": "incident", "when": "before", "active": true },
+      "points": 30
+    },
+    {
+      "id": "c2",
+      "name": "Script usa current, sem current.update()",
+      "type": "script_not_contains",
+      "params": { "source_table": "sys_script", "filter": "collection=incident^active=true", "text": "current.update()" },
+      "points": 20
+    },
+    {
+      "id": "c3",
+      "name": "Incidente do VIP com prioridade 1",
+      "type": "record_exists",
+      "params": { "table": "incident", "query": "caller_id.user_name=lab.vip^priority=1" },
+      "points": 50,
+      "hint": "Verifique a condição do caller: o campo VIP fica no usuário (caller_id.vip).",
+      "hint_cost": 10
+    }
+  ]
+}

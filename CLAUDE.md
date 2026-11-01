@@ -52,6 +52,10 @@ devlab/
 ## Escopos e convenções
 
 - Prefixo de escopo: usar o vendor prefix da PDI (`x_<prefixo>_`). Hub: `x_<prefixo>_dlhub`; Agent: `x_<prefixo>_dlagent`.
+  PDI do Hub: `dev400642.service-now.com`, vendor prefix `1556735` → **`x_1556735_dlhub`** e **`x_1556735_dlagent`**.
+  Limites do SDK: escopo ≤ 18 caracteres; nome de tabela ≤ 30 caracteres; toda tabela nova precisa de form padrão.
+- SDK: `@servicenow/sdk` 4.14.0 (Fluent), Node ≥ 20.18. Comandos: `npm run build`, `npm run deploy` (= `now-sdk install`),
+  `now-sdk pack` (gera o Update Set do Agent). Documentação local: `npx now-sdk explain <tópico>`.
 - Código, nomes de campos e comentários em inglês; labels, mensagens e textos de UI em português.
 - Toda lógica de servidor em Script Includes testáveis; Business Rules/REST/UI Actions só orquestram.
 - Versionar: cada atividade tem `version`; o Agent informa `agent_version` em toda chamada.
@@ -61,12 +65,12 @@ devlab/
 | Tabela | Campos principais |
 |---|---|
 | `track` (Trilha) | name, description, order, active |
-| `activity` (Atividade) | number (LAB0001), title, track, level (junior/pleno/senior), description (HTML), due_date, state (draft/published/archived), version, setup (JSON), max_attempts, total_points (calculado) |
-| `check` | activity, order, name, type, params (JSON), points, required, hint, hint_cost |
+| `activity` (Atividade) | number (LAB0001), title, track, level (junior/pleno/senior), description (HTML), due_date, state (draft/published/archived), version, setup (JSON), max_attempts, total_points (calculado), published_on (data da publicação — usado em "Aguardando aprovação") |
+| `check` | activity, code (id do check no JSON: c1, c2…; único por atividade), order, name, type, params (JSON), points, required, hint, hint_cost |
 | `participant` (Dev) | name, email, instance_url, token_hash, active, last_seen, agent_version |
 | `enrollment` (Dev × Atividade) | participant, activity, state (available/approved/in_progress/completed/expired), approved_at, completed_at, score, attempts, hints_used |
 | `result` (Dev × Check × Tentativa) | enrollment, check, attempt, passed, points, evidence (JSON), evidence_hash, validated_at |
-| `api_log` | participant, endpoint, payload_summary, status, created |
+| `api_log` | participant, endpoint, payload_summary, status (HTTP), created (= `sys_created_on`) |
 
 Dashboard: ranking geral, pontuação por trilha, progresso por atividade (heatmap dev × check),
 devs inativos (last_seen), atividades com maior taxa de falha por check.
@@ -78,9 +82,14 @@ devs inativos (last_seen), atividades com maior taxa de falha por check.
 | `activity` | cópia local da atividade (enunciado, setup, checks, versão) + state local |
 | `check_result` | resultado local de cada check por tentativa |
 | `outbox` | mensagens pendentes para o Hub: endpoint, payload, status, attempts, next_retry |
-| Propriedades | hub_url, participant_token (password2), pull_interval |
+| Propriedades | hub_url, hub_user, hub_password (password2), participant_token (password2), pull_interval, last_sync (data/hora do último contato com sucesso), score_cache (JSON: points, rank, completed, total — devolvido pelo Hub) |
+
+`hub_user`/`hub_password` são o usuário de integração compartilhado do Hub (Basic Auth). Se `gs.getProperty` não
+devolver o valor decifrado de uma password2 no escopo, o plano B é um Basic Auth Profile preenchido pelo dev.
 
 Jobs: pull de atividades (30 min), flush do outbox (15 min, backoff exponencial até 12h).
+"Sincronizar agora" é assíncrono: o widget só dispara o evento `x_1556735_dlagent.sync_now`; uma Script Action
+executa pull + flush. O portal nunca espera o Hub responder.
 A interface do dev é o portal `/devlab` (seção Interface); as ações Aprovar e instalar, Validar e Ver dica
 ficam nele, não em UI Actions de form.
 
@@ -95,6 +104,8 @@ ficam nele, não em UI Actions de form.
 ## Contrato da API do Hub
 
 Base: `/api/x_<prefixo>_dlhub/devlab/v1` — todas as respostas em JSON, com `X-DevLab-Token`.
+(Implementação: `RestApi` com `serviceId: 'devlab'` sem versionamento do SDK e rotas `/v1/...`, para manter
+exatamente essa URL. O versionamento nativo geraria `/api/<escopo>/v1/devlab/...`.) Contrato completo em `docs/api-contract.md`.
 
 | Método | Rota | Descrição |
 |---|---|---|

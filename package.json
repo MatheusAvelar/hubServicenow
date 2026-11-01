@@ -1,0 +1,15 @@
+{
+    "name": "devlab",
+    "private": true,
+    "description": "Dev Lab — laboratórios guiados ServiceNow (Hub + Agent). Node só para o SDK e validações locais.",
+    "license": "UNLICENSED",
+    "engines": {
+        "node": ">=20.18.0"
+    },
+    "scripts": {
+        "test": "node --test tests/*.test.js",
+        "validate": "node scripts/validate-activity.js",
+        "hub:build": "npm --prefix hub run build",
+        "check": "npm run validate && npm test && npm run hub:build"
+    }
+}
