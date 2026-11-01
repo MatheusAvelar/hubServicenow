@@ -1,0 +1,20 @@
+# Credenciais e ambiente — nunca commitar
+.env
+.env.*
+!.env.example
+.now-sdk/
+*.credentials*
+
+# Node / SDK
+node_modules/
+dist/
+target/
+*.zip
+*.tgz
+npm-debug.log*
+
+# Editor / SO
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
