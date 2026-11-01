@@ -55,7 +55,8 @@ AgentActivityService.prototype = {
         if (en && typeof en.attempts === 'number' && en.attempts > (parseInt(gr.getValue('attempts'), 10) || 0)) {
             gr.setValue('attempts', en.attempts);
         }
-        if (exists) gr.update(); else gr.insert();
+        var saved = exists ? gr.update() : gr.insert();
+        if (!saved) throw new Error('a plataforma recusou gravar a atividade ' + a.number + '.');
         return true;
     },
 

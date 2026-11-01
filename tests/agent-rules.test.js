@@ -153,3 +153,9 @@ test('todo campo JSON declara maxLength (sem ele a coluna nasce pequena e o JSON
         for (const c of cols) assert.match(c, /maxLength: \d{4,}/, `${f}: ${c}`);
     }
 });
+
+test('AGENT_VERSION informado ao Hub é a versão do package.json do Agent', () => {
+    const rules = fs.readFileSync(path.join(__dirname, '..', 'agent/src/server/script-includes/AgentRules.server.js'), 'utf8');
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'agent/package.json'), 'utf8'));
+    assert.match(rules, new RegExp(`AGENT_VERSION = '${pkg.version.replace(/\./g, '\\.')}'`));
+});
