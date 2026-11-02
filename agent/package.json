@@ -1,0 +1,18 @@
+{
+    "name": "devlab-agent",
+    "version": "1.1.6",
+    "description": "",
+    "license": "UNLICENSED",
+    "imports": {
+        "#now:*": "./@types/servicenow/fluent/*/index.js"
+    },
+    "scripts": {
+        "build": "now-sdk build",
+        "clean": "now-sdk clean",
+        "types": "now-sdk dependencies"
+    },
+    "devDependencies": {
+        "@servicenow/sdk": "4.14.0",
+        "@servicenow/glide": "27.0.5"
+    }
+}

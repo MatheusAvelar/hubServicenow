@@ -1,0 +1,171 @@
+<div class="dl-agent">
+    <!-- Header claro: logo, selo, status de sincronização e "Sincronizar agora" -->
+    <header class="dl-agent-header" role="banner">
+        <div class="dl-agent-brand">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 3h6"></path>
+                <path d="M10 3v6l-5.5 9.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"></path>
+                <path d="M7.5 15h9"></path>
+            </svg>
+            <span class="dl-agent-logo">Dev Lab</span>
+            <span class="dl-agent-seal">Minhas Atividades</span>
+        </div>
+        <div class="dl-agent-sync" aria-live="polite">
+            <span class="dl-muted">{{data.status.sync_label}}</span>
+            <button type="button" class="dl-btn dl-btn-secondary" ng-click="c.showConfig = !c.showConfig"
+                aria-expanded="{{c.showConfig}}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+                Configurar
+            </button>
+            <button type="button" class="dl-btn" ng-click="c.sync()" ng-disabled="!!c.busy || !data.status.configured">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path>
+                    <path d="M3 21v-5h5"></path><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path><path d="M21 3v5h-5"></path></svg>
+                {{c.busy === 'sync' ? 'Solicitando…' : 'Sincronizar agora'}}
+            </button>
+        </div>
+    </header>
+
+    <div class="dl-alert" ng-if="data.notice" role="status"
+        ng-class="data.notice.ok && !data.notice.warning ? 'dl-alert-info' : 'dl-alert-error'">{{data.notice.message}}</div>
+    <div class="dl-alert dl-alert-warn" ng-if="data.status.hub_down" role="status">
+        <strong>{{data.status.hub_down_message}}</strong>
+        <span class="dl-alert-detail" ng-if="data.status.last_error">{{data.status.last_error}}</span>
+    </div>
+
+    <!-- Configuração (primeira vez ou troca de token) -->
+    <section class="dl-card" ng-if="c.showConfig || !data.status.configured" aria-labelledby="dl-config-title">
+        <h2 class="dl-card-title" id="dl-config-title">Configurar Agent</h2>
+        <p class="dl-muted" ng-if="!data.status.configured">
+            Falta configurar: <span class="dl-mono">{{data.status.missing.join(', ')}}</span>.
+            Use os dados que o instrutor enviou. Campos em branco mantêm o valor atual.
+        </p>
+        <form class="dl-config" ng-submit="c.saveConfig()" autocomplete="off">
+            <label>URL do Hub
+                <input type="url" class="form-control" ng-model="c.config.hub_url" placeholder="https://devXXXXX.service-now.com">
+            </label>
+            <label>Usuário de integração
+                <input type="text" class="form-control" ng-model="c.config.hub_user" autocomplete="off">
+            </label>
+            <label>Senha do usuário de integração
+                <input type="password" class="form-control" ng-model="c.config.hub_password" autocomplete="new-password">
+            </label>
+            <label>Seu token (64 caracteres)
+                <input type="password" class="form-control dl-mono" ng-model="c.config.participant_token" autocomplete="off">
+            </label>
+            <div><button type="submit" class="dl-btn" ng-disabled="!!c.busy">{{c.busy === 'configure' ? 'Salvando…' : 'Salvar configuração'}}</button></div>
+        </form>
+    </section>
+
+    <div class="row">
+        <!-- Coluna esquerda: pontuação + lista -->
+        <div class="col-md-5 col-sm-12 col-xs-12">
+            <section class="dl-score" aria-label="Sua pontuação">
+                <div class="dl-score-item">
+                    <span class="dl-score-label">Pontos</span>
+                    <span class="dl-score-value dl-mono">{{data.status.score.points}}</span>
+                </div>
+                <div class="dl-score-item">
+                    <span class="dl-score-label">Posição</span>
+                    <span class="dl-score-value dl-mono">{{data.status.score.rank ? data.status.score.rank + 'º' : '–'}}</span>
+                    <span class="dl-score-sub" ng-if="data.status.score.participants">de {{data.status.score.participants}}</span>
+                </div>
+                <div class="dl-score-item">
+                    <span class="dl-score-label">Concluídas</span>
+                    <span class="dl-score-value dl-mono">{{data.status.score.completed}}/{{data.status.score.total}}</span>
+                </div>
+                <p class="dl-score-note" ng-if="!data.status.score.from_hub">Pontuação local — o Hub confirma na próxima sincronização.</p>
+            </section>
+
+            <p class="dl-empty" ng-if="data.activities.length === 0">Nenhuma atividade ainda. Use “Sincronizar agora”.</p>
+            <ul class="dl-list" aria-label="Atividades">
+                <li ng-repeat="a in data.activities track by a.number">
+                    <article class="dl-card dl-activity" ng-class="{'dl-activity-selected': a.number === data.selected}">
+                        <button type="button" class="dl-activity-open" ng-click="c.select(a.number)"
+                            aria-current="{{a.number === data.selected ? 'true' : 'false'}}">
+                            <span class="dl-activity-code"><span class="dl-mono">{{a.number}}</span> · {{a.track}}</span>
+                            <span class="dl-activity-title">{{a.title}}</span>
+                        </button>
+                        <div class="dl-activity-meta">
+                            <span class="dl-badge" ng-class="c.badgeClass(a.state)">{{a.state_label}}</span>
+                            <span ng-if="a.due_label && a.state !== 'completed'">Prazo {{a.due_label}}</span>
+                            <span ng-if="a.state !== 'new' && a.state !== 'completed' && a.max_attempts">Tentativa {{a.attempts}} de {{a.max_attempts}}</span>
+                            <span ng-if="a.state === 'completed' && a.completed_label">Concluída em {{a.completed_label}}</span>
+                        </div>
+                        <div class="dl-activity-action">
+                            <button type="button" class="dl-btn" ng-if="a.state === 'new'" ng-click="c.approve(a)" ng-disabled="!!c.busy">
+                                Aprovar e instalar
+                            </button>
+                            <span class="dl-mono" ng-if="a.state !== 'new'">
+                                {{a.score}} de {{a.total_points}} pts<span ng-if="a.state !== 'completed'"> (parcial)</span>
+                            </span>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Coluna direita: detalhe -->
+        <div class="col-md-7 col-sm-12 col-xs-12">
+            <section class="dl-card dl-detail" ng-if="data.detail" aria-labelledby="dl-detail-title">
+                <div class="dl-detail-code">
+                    <span class="dl-mono">{{data.detail.number}}</span> · {{data.detail.track}} · {{data.detail.level}}
+                </div>
+                <h2 class="dl-detail-title" id="dl-detail-title">{{data.detail.title}}</h2>
+                <div class="dl-detail-meta">
+                    <span ng-if="data.detail.due_label">Prazo {{data.detail.due_label}}</span>
+                    <span ng-if="data.detail.max_attempts">Tentativas {{data.detail.attempts}} de {{data.detail.max_attempts}}</span>
+                    <span ng-if="data.detail.approved_label">Aprovada em {{data.detail.approved_label}}</span>
+                    <span class="dl-mono">{{data.detail.score}} de {{data.detail.total_points}} pts</span>
+                </div>
+                <div class="dl-bar" role="img" aria-label="{{data.detail.progress}}% dos pontos">
+                    <span ng-style="{width: data.detail.progress + '%'}"></span>
+                </div>
+
+                <h3 class="dl-section">Enunciado</h3>
+                <div class="dl-statement" ng-bind-html="data.detail.description"></div>
+
+                <div ng-if="data.detail.state === 'new' && data.detail.setup_preview.length" class="dl-setup-preview">
+                    <h3 class="dl-section">O setup vai criar</h3>
+                    <ul><li ng-repeat="s in data.detail.setup_preview track by $index" class="dl-mono">{{s}}</li></ul>
+                </div>
+                <div ng-if="data.detail.state !== 'new' && data.detail.setup_log.length" class="dl-setup-log">
+                    <h3 class="dl-section">Setup</h3>
+                    <ul>
+                        <li ng-repeat="s in data.detail.setup_log track by $index" ng-class="{'dl-setup-fail': !s.ok}">
+                            <span aria-hidden="true">{{s.ok ? '✓' : '✕'}}</span>
+                            <span>{{s.ok ? 'OK' : 'Falhou'}}:</span> {{s.message}}
+                        </li>
+                    </ul>
+                </div>
+
+                <h3 class="dl-section">Critérios avaliados</h3>
+                <ul class="dl-criteria">
+                    <li ng-repeat="k in data.detail.criteria track by k.id">
+                        <span ng-if="data.detail.state !== 'new'" class="dl-status" ng-class="'dl-status-' + k.status"
+                            role="img" aria-label="{{c.statusLabel(k.status)}}" title="{{c.statusLabel(k.status)}}">{{c.statusIcon(k.status)}}</span>
+                        <div class="dl-criteria-body">
+                            <div class="dl-criteria-name"><span class="dl-mono">{{k.id}}</span> · {{k.name}}</div>
+                            <div class="dl-criteria-msg" ng-if="k.message">{{k.message}}</div>
+                        </div>
+                        <span class="dl-mono dl-criteria-pts">
+                            <span ng-if="data.detail.state !== 'new'">{{k.points}}/</span>{{k.max}} pts
+                        </span>
+                    </li>
+                </ul>
+
+                <div class="dl-detail-actions">
+                    <button type="button" class="dl-btn" ng-if="data.detail.state === 'new'" ng-click="c.approve(data.detail)"
+                        ng-disabled="!!c.busy">{{c.busy === 'approve' ? 'Instalando…' : 'Aprovar e instalar'}}</button>
+                    <button type="button" class="dl-btn" ng-if="data.detail.state !== 'new'" ng-click="c.validate(data.detail)"
+                        ng-disabled="!!c.busy || (data.detail.max_attempts && data.detail.attempts >= data.detail.max_attempts)">
+                        {{c.busy === 'validate' ? 'Validando…' : (data.detail.attempts > 0 ? 'Validar novamente' : 'Validar')}}
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

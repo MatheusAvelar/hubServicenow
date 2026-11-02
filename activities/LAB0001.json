@@ -1,0 +1,62 @@
+{
+  "number": "LAB0001",
+  "version": 3,
+  "track": "Business Rules",
+  "title": "Prioridade automática em incidentes VIP",
+  "level": "junior",
+  "description": "<h4>Contexto</h4>\n<p>Clientes <strong>VIP</strong> (diretores, por exemplo) não podem esperar na fila. Hoje, quando um VIP abre um incidente, a prioridade fica com o valor que quem registrou escolheu, às vezes baixa. Sua tarefa é automatizar isso: <strong>todo incidente aberto por um VIP deve nascer com Prioridade 1 - Critical</strong>.</p>\n\n<h4>O que você vai construir</h4>\n<p>Uma <strong>Business Rule</strong> na tabela <code>incident</code> que, quando o <em>caller</em> (quem está sendo atendido) for VIP, define <strong>Impact = 1 - High</strong> e <strong>Urgency = 1 - High</strong>. Com Impacto 1 e Urgência 1, a plataforma calcula <strong>Priority = 1 - Critical</strong>.</p>\n\n<h4>Conceitos que você vai usar</h4>\n<ul>\n<li><strong>Business Rule (BR)</strong>: script que roda no servidor quando um registro é inserido, atualizado, excluído ou consultado.</li>\n<li><strong>before</strong>: a BR roda <em>antes</em> de o registro ser gravado no banco. Tudo o que você alterar em <code>current</code> é salvo junto, sem precisar mandar salvar.</li>\n<li><code>current</code>: o registro que está sendo gravado (aqui, o incidente). Exemplo: <code>current.short_description</code>.</li>\n<li><strong>Priority</strong> não é escolhida direto: vem da combinação <strong>Impact × Urgency</strong> (1 e 1 resultam em 1).</li>\n<li><strong>VIP</strong> é um campo do <em>usuário</em> (<code>sys_user.vip</code>), não do incidente. A partir do incidente você chega nele por <code>caller_id.vip</code>.</li>\n</ul>\n\n<h4>Antes de começar</h4>\n<ol>\n<li>Clique em <strong>Aprovar e instalar</strong>. O Agent cria na sua PDI o usuário <code>lab.vip</code> (Lab VIP), já marcado como VIP.</li>\n<li>Só vale o que você criar <strong>depois</strong> da aprovação. Se você já tinha uma BR parecida, crie uma nova.</li>\n</ol>\n\n<h4>Passo a passo</h4>\n<ol>\n<li>No menu da sua PDI, abra <strong>System Definition → Business Rules</strong> e clique em <strong>New</strong>.</li>\n<li>Preencha:\n<ul>\n<li><strong>Name</strong>: <code>LAB0001 - Prioridade VIP</code></li>\n<li><strong>Table</strong>: <code>Incident [incident]</code></li>\n<li><strong>Active</strong>: marcado</li>\n<li><strong>Advanced</strong>: marcado (é o que faz a aba de script aparecer)</li>\n</ul>\n</li>\n<li>Na aba <strong>When to run</strong>:\n<ul>\n<li><strong>When</strong>: <code>before</code></li>\n<li>Marque <strong>Insert</strong> e <strong>Update</strong></li>\n<li>Em <strong>Filter Conditions</strong>, monte a condição <strong>Caller → VIP</strong> <em>is</em> <strong>true</strong>. Para chegar no campo VIP, escolha <strong>Caller</strong> e use <strong>Show Related Fields</strong> (ou o ícone de expandir ao lado do campo). Assim a BR só roda para incidentes de VIP.</li>\n</ul>\n</li>\n<li>Na aba <strong>Advanced</strong>, complete o script. O esqueleto abaixo mostra o que falta fazer:\n<pre><code>(function executeRule(current, previous /*null when async*/) {\n\n    // A condição \"Caller.VIP = true\" já filtrou: aqui só chegam incidentes de VIP.\n\n    // 1) Defina o impacto (campo impact) como 1, usando current.\n\n    // 2) Defina a urgência (campo urgency) como 1, usando current.\n\n    // Não chame nenhum método para salvar: numa BR before a gravação já vai acontecer.\n\n})(current, previous);</code></pre>\n<p>Para atribuir um valor a um campo: <code>current.nome_do_campo = valor;</code> ou <code>current.setValue('nome_do_campo', valor);</code></p>\n</li>\n<li>Clique em <strong>Submit</strong>.</li>\n</ol>\n\n<h4>Como testar</h4>\n<ol>\n<li>Abra <strong>Incident → Create New</strong>.</li>\n<li>Em <strong>Caller</strong>, escolha <code>Lab VIP</code>. Preencha a <strong>Short description</strong> com qualquer texto e não mexa em Impact/Urgency.</li>\n<li>Clique em <strong>Submit</strong> e abra o incidente criado. <strong>Priority</strong> deve estar <strong>1 - Critical</strong>.</li>\n<li>Repita com outro caller (ex.: <em>Abel Tuter</em>): a prioridade <strong>não</strong> deve mudar.</li>\n<li>Volte ao Dev Lab e clique em <strong>Validar</strong>.</li>\n</ol>\n\n<h4>Como você será avaliado (100 pts)</h4>\n<table>\n<tr><th>Critério</th><th>O que o Agent confere</th><th>Pontos</th></tr>\n<tr><td>c1</td><td>Existe uma BR <strong>before</strong>, <strong>ativa</strong>, na tabela <code>incident</code>, criada depois da aprovação.</td><td>30</td></tr>\n<tr><td>c2</td><td>Nenhuma BR ativa de <code>incident</code> que você criou contém <code>current.update()</code> (nem em comentário).</td><td>20</td></tr>\n<tr><td>c3</td><td>Existe um incidente criado depois da aprovação, com caller <code>lab.vip</code> e Priority 1.</td><td>50</td></tr>\n</table>\n\n<h4>Erros comuns</h4>\n<ul>\n<li><strong>Usar <code>current.update()</code> numa BR before</strong>: faz a gravação acontecer duas vezes e pode causar loop. Em before, só altere os campos.</li>\n<li><strong>Esquecer de marcar Advanced</strong>: a aba de script não aparece.</li>\n<li><strong>Escolher after em vez de before</strong>: em after, o que você muda em <code>current</code> não é salvo sem uma nova gravação.</li>\n<li><strong>Testar com um incidente antigo</strong>: só contam incidentes criados depois da aprovação, com a BR já ativa. Crie um novo.</li>\n<li><strong>A prioridade não ficou 1?</strong> Confira no incidente se Impact e Urgency ficaram 1. Se ficaram e mesmo assim a prioridade não mudou, a sua PDI pode ter outra regra de prioridade: defina também <code>priority</code> como 1.</li>\n</ul>\n\n<blockquote><p>Tempo estimado: 20 a 30 minutos. Travou? Releia <strong>Erros comuns</strong> e confira a mensagem de cada critério depois de <strong>Validar</strong>: ela diz o que faltou. Se continuar travado, fale com o instrutor.</p></blockquote>",
+  "due_date": "2026-11-15",
+  "max_attempts": 5,
+  "setup": [
+    {
+      "action": "create_record",
+      "table": "sys_user",
+      "key": [
+        "user_name"
+      ],
+      "values": {
+        "user_name": "lab.vip",
+        "first_name": "Lab",
+        "last_name": "VIP",
+        "vip": true,
+        "active": true
+      }
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "name": "BR before criada na tabela incident",
+      "type": "business_rule",
+      "params": {
+        "table": "incident",
+        "when": "before",
+        "active": true
+      },
+      "points": 30
+    },
+    {
+      "id": "c2",
+      "name": "Script usa current, sem current.update()",
+      "type": "script_not_contains",
+      "params": {
+        "source_table": "sys_script",
+        "filter": "collection=incident^active=true",
+        "text": "current.update()"
+      },
+      "points": 20
+    },
+    {
+      "id": "c3",
+      "name": "Incidente do VIP com prioridade 1",
+      "type": "record_exists",
+      "params": {
+        "table": "incident",
+        "query": "caller_id.user_name=lab.vip^priority=1"
+      },
+      "points": 50,
+      "hint": "Verifique a condição do caller: o campo VIP fica no usuário (caller_id.vip).",
+      "hint_cost": 10
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MatheusAvelar/hubServicenow/schemas/activity.schema.json",
+  "title": "Atividade do Dev Lab",
+  "description": "Formato de activities/*.json. As mesmas regras são aplicadas no Hub pelo ActivityValidator (hub/src/server/script-includes/ActivityValidator.server.js), que também verifica o enunciado (sem script/eventos/AngularJS) e hint_cost <= points.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["number", "version", "track", "title", "level", "description", "checks"],
+  "properties": {
+    "number": { "type": "string", "pattern": "^LAB[0-9]{4}$", "description": "Código único, ex.: LAB0001" },
+    "version": { "type": "integer", "minimum": 1, "description": "O Hub incrementa ao reimportar uma atividade existente." },
+    "track": { "type": "string", "minLength": 1, "maxLength": 100, "description": "Nome da trilha (criada no Hub se não existir)." },
+    "title": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "level": { "enum": ["junior", "pleno", "senior"] },
+    "description": { "type": "string", "minLength": 1, "description": "Enunciado em HTML simples (sem script, iframe, form, style, eventos on*, javascript: ou {{ }})." },
+    "due_date": { "type": "string", "format": "date", "description": "AAAA-MM-DD" },
+    "max_attempts": { "type": "integer", "minimum": 1 },
+    "setup": {
+      "type": "array",
+      "description": "Ações declarativas executadas pelo SetupEngine do Agent após a aprovação do dev.",
+      "items": { "$ref": "#/$defs/setupStep" }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/check" }
+    }
+  },
+  "$defs": {
+    "setupStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "table", "values"],
+      "properties": {
+        "action": { "const": "create_record" },
+        "table": { "enum": ["sys_user", "sys_user_group", "incident"], "description": "Allowlist: precisa bater com os cross-scope privileges do Agent." },
+        "values": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^(?!sys_)[a-z][a-z0-9_]*$" },
+          "additionalProperties": { "type": ["string", "number", "boolean", "null"] }
+        },
+        "key": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Campos usados para não duplicar o registro se o setup rodar de novo (devem estar em values)."
+        }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "type", "params", "points"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,19}$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "type": { "enum": ["record_exists", "business_rule", "script_not_contains"] },
+        "params": { "type": "object" },
+        "points": { "type": "integer", "minimum": 0 },
+        "required": { "type": "boolean", "default": true },
+        "hint": { "type": "string" },
+        "hint_cost": { "type": "integer", "minimum": 0 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "record_exists" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params_record_exists" } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "business_rule" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params_business_rule" } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "script_not_contains" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params_script_not_contains" } } }
+        }
+      ]
+    },
+    "tableName": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,79}$" },
+    "params_record_exists": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table", "query"],
+      "properties": {
+        "table": { "enum": ["incident", "problem", "change_request", "sc_req_item", "sys_user", "sys_user_group", "sys_user_grmember"], "description": "Tabelas que o Agent pode ler (cross-scope privileges)." },
+        "query": { "type": "string", "minLength": 1, "maxLength": 4000, "description": "Encoded query. O motor também exige sys_created_on posterior à aprovação." }
+      }
+    },
+    "params_business_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table"],
+      "properties": {
+        "table": { "$ref": "#/$defs/tableName" },
+        "when": { "enum": ["before", "after", "async", "display"] },
+        "active": { "type": "boolean" },
+        "action": { "type": "array", "minItems": 1, "items": { "enum": ["insert", "update", "delete", "query"] } },
+        "name_contains": { "type": "string" }
+      }
+    },
+    "params_script_not_contains": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_table", "filter", "text"],
+      "properties": {
+        "source_table": { "enum": ["sys_script", "sys_script_include", "sys_script_client"] },
+        "filter": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "text": { "type": "string", "minLength": 1, "maxLength": 500 }
+      }
+    }
+  }
+}

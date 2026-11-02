@@ -1,0 +1,95 @@
+.dl-agent { padding: 24px 0 48px; }
+
+.dl-agent-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: var(--dl-card);
+    border: 1px solid var(--dl-border);
+    border-radius: var(--dl-radius);
+    padding: 12px 20px;
+    margin-bottom: 24px;
+}
+.dl-agent-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--dl-text); }
+.dl-agent-logo { font-size: 20px; font-weight: 700; }
+.dl-agent-seal { font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; background: var(--dl-accent-soft); color: var(--dl-accent-hover); }
+.dl-agent-sync { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+
+.dl-alert-warn { background: var(--dl-warn-bg); color: var(--dl-warn); }
+.dl-alert-detail { display: block; font-size: 14px; margin-top: 4px; }
+
+.dl-config { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; align-items: end; }
+.dl-config label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: var(--dl-text-2); }
+.dl-config .form-control { min-height: 44px; border-radius: 8px; border-color: var(--dl-border); }
+
+/* Card de pontuação (fundo escuro) */
+.dl-score {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    background: var(--dl-header);
+    color: #FFFFFF;
+    border-radius: var(--dl-radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+}
+.dl-score-item { display: flex; flex-direction: column; min-width: 90px; }
+.dl-score-label { font-size: 13px; color: #C9D1CD; font-weight: 600; }
+.dl-score-value { font-size: 28px; font-weight: 600; line-height: 1.2; }
+.dl-score-sub { font-size: 13px; color: #C9D1CD; }
+.dl-score-note { width: 100%; margin: 0; font-size: 13px; color: #C9D1CD; }
+
+.dl-list { list-style: none; margin: 0; padding: 0; }
+.dl-activity { padding: 16px 20px; margin-bottom: 12px; }
+.dl-activity-selected { border-color: var(--dl-accent); box-shadow: 0 0 0 1px var(--dl-accent); }
+.dl-activity-open {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    min-height: 44px;
+}
+.dl-activity-open:focus-visible { outline: 2px solid var(--dl-accent); outline-offset: 4px; border-radius: 4px; }
+.dl-activity-code { display: block; font-size: 13px; color: var(--dl-text-2); }
+.dl-activity-title { display: block; font-size: 17px; font-weight: 600; margin-top: 2px; }
+.dl-activity-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 14px; color: var(--dl-text-2); margin: 10px 0; }
+.dl-activity-action { display: flex; justify-content: flex-end; }
+
+.dl-detail-code { font-size: 14px; color: var(--dl-text-2); }
+.dl-detail-title { font-size: 22px; font-weight: 700; margin: 4px 0 8px; }
+.dl-detail-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--dl-text-2); margin-bottom: 12px; }
+.dl-section { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
+.dl-statement { line-height: 1.6; }
+.dl-statement h4 { font-size: 15px; font-weight: 700; margin: 20px 0 6px; color: var(--dl-text); }
+.dl-statement h4:first-child { margin-top: 0; }
+.dl-statement p { margin: 0 0 10px; }
+.dl-statement ol, .dl-statement ul { margin: 0 0 12px; padding-left: 22px; }
+.dl-statement li { margin-bottom: 6px; }
+.dl-statement pre { font-family: var(--dl-mono); font-size: 13px; background: var(--dl-pending-bg); border: 1px solid var(--dl-border);
+    border-radius: 8px; padding: 12px; overflow-x: auto; white-space: pre; margin: 6px 0 12px; }
+.dl-statement pre code { background: none; padding: 0; }
+.dl-statement blockquote { margin: 10px 0 14px; padding: 10px 14px; border-left: 4px solid var(--dl-accent); background: var(--dl-accent-soft);
+    border-radius: 0 8px 8px 0; color: var(--dl-text); }
+.dl-statement blockquote p:last-child { margin-bottom: 0; }
+.dl-statement table { border-collapse: collapse; margin: 6px 0 12px; }
+.dl-statement th, .dl-statement td { border: 1px solid var(--dl-border); padding: 6px 10px; text-align: left; }
+.dl-statement code { font-family: var(--dl-mono); background: var(--dl-pending-bg); padding: 1px 4px; border-radius: 4px; color: var(--dl-text); }
+.dl-setup-preview ul, .dl-setup-log ul { margin: 0; padding-left: 20px; }
+.dl-setup-fail { color: var(--dl-fail); }
+
+.dl-criteria { list-style: none; margin: 0; padding: 0; }
+.dl-criteria li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--dl-border); }
+.dl-criteria li:last-child { border-bottom: 0; }
+.dl-criteria-body { flex: 1 1 auto; min-width: 0; }
+.dl-criteria-name { font-weight: 600; }
+.dl-criteria-msg { font-size: 14px; color: var(--dl-text-2); margin-top: 2px; overflow-wrap: anywhere; }
+.dl-criteria-pts { white-space: nowrap; }
+/* Garante o texto do status só para leitor de tela mesmo se o tema não carregar. */
+.dl-criteria .sr-only-dl { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; padding: 0; }
+.dl-detail-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
